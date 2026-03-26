@@ -1,6 +1,5 @@
-[Sportbox Pilates.html](https://github.com/user-attachments/files/26280698/Sportbox.Pilates.html)
 <!DOCTYPE html>
-<!-- saved from url=(0057)file:///C:/Users/Ricoe/Downloads/sportbox-pilates_14.html -->
+<!-- saved from url=(0057)file:///C:/Users/Ricoe/Downloads/sportbox-pilates_15.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -849,6 +848,13 @@ async function saveTeacher(btn){
   await sb('classes?id=eq.'+classId,{method:'PATCH',prefer:'return=minimal',body:JSON.stringify({teacher:teacher})});
   showToast('Profesora guardada.');
   await loadSchedule();
+// Auto-open admin if URL has ?admin
+if(window.location.search.includes('admin')){
+  setTimeout(function(){
+    document.getElementById('admin-modal-overlay').style.display='flex';
+    document.getElementById('admin-user-input').focus();
+  },500);
+}
 }
 
 function adminChangeWeek(d){const n=adminWeekOffset+d;if(n<0||n>MAX_WEEK_OFFSET)return;adminWeekOffset=n;renderAdminEnrollments();}
