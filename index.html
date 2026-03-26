@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<!-- saved from url=(0057)file:///C:/Users/Ricoe/Downloads/sportbox-pilates_17.html -->
+<!-- saved from url=(0057)file:///C:/Users/Ricoe/Downloads/sportbox-pilates_18.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
 <title>Sportbox Pilates</title>
 <style>*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#e8e8e5;min-height:100vh;padding:1rem}
-.app{max-width:680px;margin:0 auto;background:#fff;border-radius:16px;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#e8e8e5;min-height:100vh;padding:0.75rem;padding-top:env(safe-area-inset-top,0.75rem);padding-bottom:env(safe-area-inset-bottom,0.75rem)}
+.app{max-width:680px;width:100%;margin:0 auto;background:#fff;border-radius:16px;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
 .logo{text-align:center;padding:1rem 0 1.2rem;border-bottom:1px solid #d8d8d5;margin-bottom:1.5rem;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
 .logo img{height:188px;width:auto;object-fit:contain;cursor:default;-webkit-user-drag:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 .logo p{font-size:12px;color:#999;margin-top:6px;font-style:italic}
@@ -77,6 +77,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .admin-tab{flex:1;min-width:60px;padding:8px 6px;font-size:12px;border:none;background:#f0f0ed;color:#888;cursor:pointer;text-align:center;font-weight:500}
 .admin-tab.active{background:#7c6fa0;color:#fff}
 .admin-tab:not(.active):hover{background:#e4e4e0;color:#444}
+.filter-btn{padding:5px 12px;border:1.5px solid #ccc;border-radius:99px;background:#fff;color:#555;font-size:12px;cursor:pointer;font-weight:500}
+.filter-btn.active{border-color:#1a1a1a;color:#1a1a1a;background:#f0f0ed;font-weight:700}
+.plan-prueba-btn{border-color:#888;color:#888}
+.plan-prueba-btn.active{background:#888;color:#fff;border-color:#888}
+.plan-4-btn{border-color:#2980b9;color:#2980b9}
+.plan-4-btn.active{background:#2980b9;color:#fff;border-color:#2980b9}
+.plan-8-btn{border-color:#27ae60;color:#27ae60}
+.plan-8-btn.active{background:#27ae60;color:#fff;border-color:#27ae60}
+.plan-12-btn{border-color:#8e44ad;color:#8e44ad}
+.plan-12-btn.active{background:#8e44ad;color:#fff;border-color:#8e44ad}
 .search-bar{width:100%;padding:9px 13px;border:1.5px solid #ccc;border-radius:10px;font-size:14px;color:#1a1a1a;outline:none;background:#fafaf8;margin-bottom:1rem}
 .search-bar:focus{border-color:#7c6fa0;background:#fff}
 .new-student-form{background:#f5f5f2;border:1.5px solid #ddd;border-radius:10px;padding:14px;margin-bottom:1.2rem}
@@ -92,6 +102,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .expire-tag{color:#888;font-size:11px}
 .expire-tag.expired{color:#c0392b;font-weight:600}
 .student-credits{font-size:12px;font-weight:700;color:#fff;background:#7c6fa0;border-radius:99px;padding:3px 12px;white-space:nowrap}
+.plan-prueba{background:#888}
+.plan-4{background:#2980b9}
+.plan-8{background:#27ae60}
+.plan-12{background:#8e44ad}
+.plan-other{background:#7c6fa0}
 .student-credits.zero{background:#c0392b}
 .credit-controls{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
 .credit-controls input{width:48px;padding:5px 6px;border:1.5px solid #ccc;border-radius:8px;font-size:13px;text-align:center;background:#fff}
@@ -174,7 +189,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .enroll-student-info{flex:1}
 .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:#4a4560;color:#fff;border-radius:10px;padding:10px 22px;font-size:13px;font-weight:500;opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:999;white-space:nowrap}
 .toast.show{opacity:1}
-@media(max-width:480px){.app{padding:1rem}.credit-controls{flex-wrap:wrap}.student-row{gap:6px}.admin-tabs{flex-wrap:wrap}}</style>
+@media(max-width:600px){.app{padding:1rem;border-radius:12px;margin:0 auto}.logo img{height:140px}.class-time{font-size:14px}.enroll-btn{padding:7px 12px;font-size:12px}.credit-controls{flex-wrap:wrap}.student-row{gap:6px}.admin-tabs{flex-wrap:wrap}.admin-top{flex-wrap:wrap;gap:6px}.user-info-bar{gap:6px}.credits-badge{font-size:11px}.field-row button{padding:9px 12px;font-size:13px}.week-nav button{padding:5px 12px;font-size:13px}.modal-box{margin:0.5rem;width:calc(100% - 1rem)}}</style>
 </head>
 <body>
 <div class="app">
@@ -227,6 +242,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
         <button class="credit-btn add" onclick="openTeacherModal()">✎ Profesoras</button>
         <button class="credit-btn renew" onclick="exportStudentsExcel()">↓ Excel</button>
         <button class="logout-link" onclick="adminLogout()">Salir</button>
+        <button class="logout-link" onclick="adminGoHome()" style="color:#7c6fa0">⌂ Inicio</button>
       </div>
     </div>
     <div class="admin-tabs">
@@ -243,11 +259,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
         <input type="text" id="new-name" placeholder="Nombre completo..." maxlength="60">
         <input type="text" id="new-dni" placeholder="DNI..." maxlength="10" inputmode="numeric">
         <input type="tel" id="new-phone" placeholder="Teléfono (opcional)..." maxlength="20">
-        <input type="number" id="new-credits" placeholder="Créditos iniciales..." min="0" max="99">
+        <select id="new-credits" style="width:100%;padding:8px 12px;border:1.5px solid #ccc;border-radius:8px;font-size:13px;color:#1a1a1a;margin-bottom:7px;outline:none;background:#fff">
+          <option value="0">Sin créditos</option>
+          <option value="1">1 clase (Prueba)</option>
+          <option value="4">4 clases (Plan 4)</option>
+          <option value="8">8 clases (Plan 8)</option>
+          <option value="12">12 clases (Plan 12)</option>
+        </select>
         <div id="new-student-error" class="error-msg" style="margin-bottom:8px"></div>
         <button onclick="createStudent()">Crear alumno</button>
       </div>
       <div class="section-title">Alumnos registrados</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
+        <button class="filter-btn active" id="filter-all" onclick="setFilter(&#39;all&#39;)">Todos</button>
+        <button class="filter-btn plan-prueba-btn" id="filter-1" onclick="setFilter(1)">Prueba</button>
+        <button class="filter-btn plan-4-btn" id="filter-4" onclick="setFilter(4)">Plan 4</button>
+        <button class="filter-btn plan-8-btn" id="filter-8" onclick="setFilter(8)">Plan 8</button>
+        <button class="filter-btn plan-12-btn" id="filter-12" onclick="setFilter(12)">Plan 12</button>
+      </div>
       <input type="text" id="student-search" class="search-bar" placeholder="Buscar por nombre o DNI...">
       <div id="admin-students-list"><div class="loading">Cargando...</div></div>
     </div>
@@ -805,9 +834,12 @@ async function renderAdminStudents(filter){
   document.getElementById('admin-students-list').innerHTML='<div class="loading">Cargando...</div>';
   const students=await sb('students?select=*&order=credits_expire_at.asc.nullslast,full_name.asc');
   if(!students||!students.length){document.getElementById('admin-students-list').innerHTML='<div class="no-classes">No hay alumnos registrados.</div>';return;}
-  const filtered=filter?students.filter(function(s){
+  let filtered=filter?students.filter(function(s){
     return s.full_name.toLowerCase().includes(filter.toLowerCase())||s.dni.includes(filter);
   }):students;
+  if(currentPlanFilter!=='all'){
+    filtered=filtered.filter(function(s){return s.last_credits===currentPlanFilter;});
+  }
   if(!filtered.length){document.getElementById('admin-students-list').innerHTML='<div class="no-classes">No se encontraron alumnos.</div>';return;}
   let html='';
   filtered.forEach(function(s){
@@ -821,7 +853,9 @@ async function renderAdminStudents(filter){
     html+='<div class="student-name">'+s.full_name+'</div>';
     html+='<div class="student-dni">DNI '+s.dni+(s.phone?' \u2014 \ud83d\udcf1 '+s.phone:'')+(exp?'<span class="expire-tag'+(expired?' expired':'')+'"> \u2014 vence '+exp+'</span>':'')+'</div>';
     html+='</div>';
-    html+='<span class="student-credits'+(c===0||expired?' zero':'')+'">'+c+' cr\u00e9dito'+(c!==1?'s':'')+'</span>';
+    const planClass=expired||c===0?'zero':s.last_credits===1?'plan-prueba':s.last_credits===4?'plan-4':s.last_credits===8?'plan-8':s.last_credits===12?'plan-12':'plan-other';
+    const planLabel=s.last_credits===1?'Prueba':s.last_credits===4?'Plan 4':s.last_credits===8?'Plan 8':s.last_credits===12?'Plan 12':'';
+    html+='<span class="student-credits '+planClass+'">'+(planLabel?planLabel+' \u2014 ':'')+c+' cr\u00e9dito'+(c!==1?'s':'')+'</span>';
     if(adminUser&&adminUser.canCredits){
       html+='<div class="credit-controls">';
       html+='<input type="number" id="cr-'+s.dni+'" value="1" min="1" max="99" style="width:48px" />';
@@ -1180,6 +1214,16 @@ document.addEventListener('keydown',function(e){
   }
 });
 
+let currentPlanFilter='all';
+function setFilter(plan){
+  currentPlanFilter=plan;
+  ['all',1,4,8,12].forEach(function(p){
+    const el=document.getElementById('filter-'+p);
+    if(el)el.classList.toggle('active',p===plan);
+  });
+  renderAdminStudents(document.getElementById('student-search').value);
+}
+
 // Student search
 document.addEventListener('DOMContentLoaded',function(){
   const searchEl=document.getElementById('student-search');
@@ -1294,6 +1338,12 @@ function exportStudentsExcel(){
     URL.revokeObjectURL(url);
     showToast('Excel descargado correctamente.');
   }).catch(function(){showToast('Error al exportar.');});
+}
+
+function adminGoHome(){
+  document.getElementById('admin-panel').style.display='none';
+  document.getElementById('user-panel').style.display='block';
+  adminUser=null;
 }
 
 function openTeacherModal(){renderTeacherPanel();document.getElementById('teacher-modal').style.display='flex';}
