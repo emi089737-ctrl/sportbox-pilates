@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0045)file:///C:/Users/Ricoe/Downloads/index_3.html -->
+<!-- saved from url=(0045)file:///C:/Users/Ricoe/Downloads/index_5.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
@@ -1069,7 +1069,7 @@ async function renderAdminEnrollments(){
   for(let d=1;d<=6;d++){
     if(!byDay[d])continue;
     const cdate=cd(ws,d),dateStr=ds(cdate);
-    byDay[d].forEach(function(cls){
+    byDay[d].filter(function(cls){return !isClassPast(dateStr,cls.time);}).forEach(function(cls){
       const key=cls.id+'__'+dateStr;
       const enrolled=cache[key]||[];
       const isCancelled=cancelledCache[cls.id+'__'+dateStr];
