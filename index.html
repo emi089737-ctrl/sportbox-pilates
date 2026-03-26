@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0057)file:///C:/Users/Ricoe/Downloads/sportbox-pilates_16.html -->
+<!-- saved from url=(0057)file:///C:/Users/Ricoe/Downloads/sportbox-pilates_17.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -169,6 +169,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .admin-login-modal input:focus{border-color:#7c6fa0}
 .admin-login-modal button.primary{width:100%;padding:9px;border:none;border-radius:10px;background:#4a4560;color:#fff;font-size:14px;cursor:pointer;font-weight:500;margin-top:4px}
 .admin-login-modal button.primary:hover{background:#5c5678}
+.enroll-student-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f0f0ee}
+.enroll-student-item:last-child{border-bottom:none}
+.enroll-student-info{flex:1}
 .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:#4a4560;color:#fff;border-radius:10px;padding:10px 22px;font-size:13px;font-weight:500;opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:999;white-space:nowrap}
 .toast.show{opacity:1}
 @media(max-width:480px){.app{padding:1rem}.credit-controls{flex-wrap:wrap}.student-row{gap:6px}.admin-tabs{flex-wrap:wrap}}</style>
@@ -222,6 +225,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
       <span style="font-size:14px;font-weight:600;color:#4a4560">Panel — <span id="admin-username-display"></span></span>
       <div style="display:flex;gap:8px;align-items:center">
         <button class="credit-btn add" onclick="openTeacherModal()">✎ Profesoras</button>
+        <button class="credit-btn renew" onclick="exportStudentsExcel()">↓ Excel</button>
         <button class="logout-link" onclick="adminLogout()">Salir</button>
       </div>
     </div>
@@ -337,6 +341,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 </div>
 
 <div class="toast" id="toast"></div>
+
+<!-- ENROLL STUDENT MODAL -->
+<div class="modal-overlay" id="enroll-modal" onclick="if(event.target===this)closeEnrollModal()">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-header-row">
+        <div>
+          <h2 style="font-size:15px;font-weight:600;color:#1a1a1a">Inscribir alumno</h2>
+          <div class="modal-header-sub" id="enroll-modal-label"></div>
+        </div>
+        <button class="modal-close" onclick="closeEnrollModal()">✕</button>
+      </div>
+    </div>
+    <div class="modal-body" style="padding:1rem 1.2rem">
+      <input type="text" id="enroll-search" class="search-bar" placeholder="Buscar alumno por nombre o DNI..." style="margin-bottom:0.5rem" oninput="searchEnrollStudents(this.value)">
+      <div id="enroll-student-list" style="max-height:300px;overflow-y:auto"></div>
+      <div id="enroll-modal-error" class="error-msg" style="margin-top:8px"></div>
+    </div>
+  </div>
+</div>
 <script>
 const SB_URL='https://cpmcotfclagnvksfxshe.supabase.co';
 const SB_KEY='sb_publishable_37NrOGX6uuqMEMggt9FEMg_fPQ4yDVx';
@@ -890,6 +914,9 @@ async function renderAdminEnrollments(){
         });
         html+='</div>';
       }else if(!isCancelled){html+='<div class="empty-label">Sin inscriptos.</div>';}
+      if(!isCancelled&&enrolled.length<MAX_SPOTS){
+        html+='<div style="margin-top:8px"><button class="credit-btn add" onclick="openEnrollModal(this)" data-class="'+cls.id+'" data-date="'+dateStr+'" data-label="'+DAYS[d]+' '+fd(cdate)+' '+cls.time+' hs'+'">+ Inscribir alumno</button></div>';
+      }
       html+='</div>';
     });
   }
@@ -1149,6 +1176,7 @@ document.addEventListener('keydown',function(e){
     closeModal();
     closeTeacherModal();
     closeAdminModal();
+    closeEnrollModal();
   }
 });
 
@@ -1165,6 +1193,108 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 
 loadSchedule();
+
+let enrollModalData={classId:null,dateStr:null};
+
+function openEnrollModal(btn){
+  enrollModalData.classId=btn.getAttribute('data-class');
+  enrollModalData.dateStr=btn.getAttribute('data-date');
+  document.getElementById('enroll-modal-label').textContent=btn.getAttribute('data-label');
+  document.getElementById('enroll-search').value='';
+  document.getElementById('enroll-student-list').innerHTML='<div style="color:#aaa;font-size:13px;padding:1rem 0;text-align:center">Escribi un nombre o DNI para buscar</div>';
+  document.getElementById('enroll-modal-error').textContent='';
+  document.getElementById('enroll-modal').style.display='flex';
+  setTimeout(function(){document.getElementById('enroll-search').focus();},100);
+}
+
+function closeEnrollModal(){
+  document.getElementById('enroll-modal').style.display='none';
+}
+
+async function searchEnrollStudents(q){
+  if(!q||q.length<2){
+    document.getElementById('enroll-student-list').innerHTML='<div style="color:#aaa;font-size:13px;padding:1rem 0;text-align:center">Escribi al menos 2 caracteres</div>';
+    return;
+  }
+  const students=await sb('students?select=*&order=full_name');
+  const filtered=students.filter(function(s){
+    return s.full_name.toLowerCase().includes(q.toLowerCase())||s.dni.includes(q);
+  });
+  if(!filtered.length){
+    document.getElementById('enroll-student-list').innerHTML='<div style="color:#aaa;font-size:13px;padding:1rem 0;text-align:center">No se encontraron alumnos</div>';
+    return;
+  }
+  let html='';
+  filtered.forEach(function(s){
+    const c=s.credits;
+    const exp=s.credits_expire_at;
+    const today=todayStr();
+    const expired=exp&&exp<today;
+    const noCredits=c<=0||expired;
+    html+='<div class="enroll-student-item">';
+    html+='<div class="enroll-student-info"><div class="student-name">'+s.full_name+'</div>';
+    html+='<div class="student-dni">DNI '+s.dni+' — <span class="'+(noCredits?'expire-tag expired':'expire-tag')+'">'+c+' crédito'+(c!==1?'s':'')+(exp?' — vence '+exp:'')+'</span></div></div>';
+    if(noCredits){
+      html+='<span style="font-size:11px;color:#c0392b;font-weight:600">Sin créditos</span>';
+    }else{
+      html+='<button class="credit-btn add" onclick="adminEnrollStudent(this)" data-dni="'+s.dni+'" data-name="'+s.full_name+'" data-credits="'+c+'">Inscribir</button>';
+    }
+    html+='</div>';
+  });
+  document.getElementById('enroll-student-list').innerHTML=html;
+}
+
+async function adminEnrollStudent(btn){
+  const dni=btn.getAttribute('data-dni');
+  const name=btn.getAttribute('data-name');
+  const credits=parseInt(btn.getAttribute('data-credits'));
+  const classId=enrollModalData.classId;
+  const dateStr=enrollModalData.dateStr;
+  const err=document.getElementById('enroll-modal-error');
+  err.textContent='';
+  btn.disabled=true;btn.textContent='...';
+  try{
+    const existing=await sb('enrollments?class_id=eq.'+classId+'&class_date=eq.'+dateStr+'&student_name=eq.'+encodeURIComponent(name)+'&select=id');
+    if(existing&&existing.length>0){err.textContent=name+' ya está inscripto en esta clase.';btn.disabled=false;btn.textContent='Inscribir';return;}
+    await sb('enrollments',{method:'POST',prefer:'return=minimal',body:JSON.stringify({class_id:classId,class_date:dateStr,student_name:name})});
+    const nc=credits-1;
+    await sb('students?dni=eq.'+dni,{method:'PATCH',prefer:'return=minimal',body:JSON.stringify({credits:nc})});
+    showToast(name+' inscripto. Le quedan '+nc+' crédito'+(nc!==1?'s':'')+'.');
+    closeEnrollModal();
+    renderAdminEnrollments();
+  }catch(e){err.textContent='Error al inscribir.';btn.disabled=false;btn.textContent='Inscribir';}
+}
+
+function exportStudentsExcel(){
+  sb('students?select=*&order=full_name').then(function(students){
+    if(!students||!students.length){showToast('No hay alumnos para exportar.');return;}
+    const today=todayStr();
+    // Build CSV
+    const rows=[['Nombre','DNI','Telefono','Plan','Creditos actuales','Vencimiento']];
+    students.forEach(function(s){
+      const plan=s.last_credits===4?'Plan 4 clases':s.last_credits===8?'Plan 8 clases':s.last_credits===12?'Plan 12 clases':s.last_credits>0?'Plan '+s.last_credits+' clases':'Sin plan';
+      rows.push([
+        s.full_name||'',
+        s.dni||'',
+        s.phone||'',
+        plan,
+        s.credits||0,
+        s.credits_expire_at||''
+      ]);
+    });
+    // Build worksheet manually using SheetJS via CDN
+    let csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+    const bom='\uFEFF';
+    const blob=new Blob([bom+csv],{type:'text/csv;charset=utf-8'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download='sportbox-alumnos-'+today+'.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Excel descargado correctamente.');
+  }).catch(function(){showToast('Error al exportar.');});
+}
 
 function openTeacherModal(){renderTeacherPanel();document.getElementById('teacher-modal').style.display='flex';}
 function closeTeacherModal(){document.getElementById('teacher-modal').style.display='none';}
