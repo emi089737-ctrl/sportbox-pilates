@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0043)file:///C:/Users/Ricoe/Downloads/index.html -->
+<!-- saved from url=(0045)file:///C:/Users/Ricoe/Downloads/index_2.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
@@ -327,6 +327,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     </div>
 
     <div id="admin-classes-panel" style="display:none">
+      <div style="margin-bottom:1rem">
+        <button class="credit-btn add" onclick="toggleAdminRecurrent()" id="admin-recurrent-toggle" style="width:100%;padding:9px;font-size:13px">↻ Inscripción recurrente para un alumno</button>
+      </div>
+      <div id="admin-recurrent-panel" style="display:none;background:#f5f5f2;border:1.5px solid #ddd;border-radius:10px;padding:14px;margin-bottom:1rem">
+        <div class="form-title" style="font-size:12px;font-weight:700;color:#777;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">Inscripción recurrente</div>
+        <input type="text" id="admin-rec-search" placeholder="Buscar alumno por nombre o DNI..." class="search-bar" style="margin-bottom:8px" oninput="searchAdminRecStudent(this.value)">
+        <div id="admin-rec-student-result" style="margin-bottom:10px"></div>
+        <div id="admin-rec-form" style="display:none">
+          <div style="font-size:12px;color:#666;margin-bottom:8px">Seleccioná los horarios a inscribir:</div>
+          <div id="admin-rec-slots" class="recurrent-slots" style="margin-bottom:10px"></div>
+          <div class="recurrent-until" style="margin-bottom:10px">
+            <label style="font-size:13px;color:#666;font-weight:500">Hasta:</label>
+            <input type="date" id="admin-rec-until" min="" max="2026-12-31" value="2026-12-31">
+          </div>
+          <button class="recurrent-btn" style="margin-bottom:0" onclick="doAdminRecurrent()">Confirmar inscripciones recurrentes</button>
+          <div id="admin-rec-result" style="margin-top:10px"></div>
+        </div>
+      </div>
       <div class="week-nav" style="margin-bottom:1rem">
         <button id="admin-prev" onclick="adminChangeWeek(-1)" disabled="">‹</button>
         <span class="week-label" id="admin-week-label"></span>
@@ -1411,6 +1429,120 @@ if(loadScheduleFromCache()){
 // Auto-open admin if URL has ?admin
 if(window.location.search.includes('admin')){
   setTimeout(function(){document.getElementById('admin-modal-overlay').style.display='flex';document.getElementById('admin-user-input').focus();},500);
+}
+
+// ADMIN RECURRENT
+let adminRecStudent=null;
+
+function toggleAdminRecurrent(){
+  const p=document.getElementById('admin-recurrent-panel');
+  const btn=document.getElementById('admin-recurrent-toggle');
+  const showing=p.style.display!=='none';
+  p.style.display=showing?'none':'block';
+  btn.style.background=showing?'':'#7c6fa0';
+  btn.style.color=showing?'':'#fff';
+  btn.style.borderColor=showing?'':'#7c6fa0';
+  if(!showing){
+    document.getElementById('admin-rec-search').value='';
+    document.getElementById('admin-rec-student-result').innerHTML='';
+    document.getElementById('admin-rec-form').style.display='none';
+    adminRecStudent=null;
+  }
+}
+
+async function searchAdminRecStudent(q){
+  const res=document.getElementById('admin-rec-student-result');
+  if(!q||q.length<2){res.innerHTML='';return;}
+  const students=await sb('students?select=*&order=full_name');
+  const filtered=students.filter(function(s){
+    return s.full_name.toLowerCase().includes(q.toLowerCase())||s.dni.includes(q);
+  });
+  if(!filtered.length){res.innerHTML='<div style="font-size:13px;color:#aaa;padding:6px 0">No se encontraron alumnos.</div>';return;}
+  let html='';
+  filtered.slice(0,5).forEach(function(s){
+    const exp=getExpireDate(s);
+    const maxDate=exp?ds(exp):'2026-12-31';
+    const c=s.credits;
+    const expired=s.credits_expire_at&&s.credits_expire_at<todayStr();
+    html+='<div class="enroll-student-item"><div class="enroll-student-info">';
+    html+='<div class="student-name">'+s.full_name+'</div>';
+    html+='<div class="student-dni">DNI '+s.dni+' — <span class="'+(expired||c<=0?'expire-tag expired':'expire-tag')+'">'+c+' crédito'+(c!==1?'s':'')+'</span></div></div>';
+    html+='<button class="credit-btn add" onclick="selectAdminRecStudent(this)" data-dni="'+s.dni+'" data-name="'+s.full_name+'" data-credits="'+c+'" data-maxdate="'+maxDate+'">Seleccionar</button>';
+    html+='</div>';
+  });
+  res.innerHTML=html;
+}
+
+function selectAdminRecStudent(btn){
+  adminRecStudent={
+    dni:btn.getAttribute('data-dni'),
+    name:btn.getAttribute('data-name'),
+    credits:parseInt(btn.getAttribute('data-credits')),
+    maxDate:btn.getAttribute('data-maxdate')
+  };
+  document.getElementById('admin-rec-search').value=adminRecStudent.name;
+  document.getElementById('admin-rec-student-result').innerHTML='<div style="font-size:13px;color:#2d7a3a;padding:4px 0;font-weight:600">✓ '+adminRecStudent.name+' seleccionado — '+adminRecStudent.credits+' crédito'+(adminRecStudent.credits!==1?'s':'')+'</div>';
+  // Build slots
+  const byDay={};
+  schedule.filter(function(cls){return cls.active!==false;}).forEach(function(cls){if(!byDay[cls.day])byDay[cls.day]=[];byDay[cls.day].push(cls);});
+  let slotsHtml='';
+  for(let d=1;d<=6;d++){
+    if(!byDay[d])continue;
+    byDay[d].forEach(function(cls){
+      slotsHtml+='<label class="recurrent-slot"><input type="checkbox" class="admin-rec-check" data-class="'+cls.id+'" data-day="'+cls.day+'" />';
+      slotsHtml+='<span class="slot-label">'+DAYS[d]+' '+cls.time+' hs'+(cls.teacher?'<span class="slot-teacher"> — '+cls.teacher+'</span>':'')+'</span></label>';
+    });
+  }
+  document.getElementById('admin-rec-slots').innerHTML=slotsHtml;
+  document.getElementById('admin-rec-until').max=adminRecStudent.maxDate;
+  document.getElementById('admin-rec-until').value=adminRecStudent.maxDate;
+  document.getElementById('admin-rec-form').style.display='block';
+  document.getElementById('admin-rec-result').innerHTML='';
+}
+
+async function doAdminRecurrent(){
+  if(!adminRecStudent){showToast('Seleccioná un alumno primero.');return;}
+  const until=document.getElementById('admin-rec-until').value;
+  if(!until){showToast('Seleccioná una fecha límite.');return;}
+  const checked=document.querySelectorAll('.admin-rec-check:checked');
+  if(!checked.length){showToast('Seleccioná al menos una clase.');return;}
+  const result=document.getElementById('admin-rec-result');
+  result.innerHTML='<div class="recurrent-processing">Procesando... esperá.</div>';
+  const limitDate=new Date(until+'T00:00:00');
+  const slots=[];
+  checked.forEach(function(inp){slots.push({classId:inp.getAttribute('data-class'),day:parseInt(inp.getAttribute('data-day'))});});
+  let reserved=0,skipped=0,noCredits=false;
+  const now=new Date();
+  let currentCredits=adminRecStudent.credits;
+  for(let w=0;w<=MAX_WEEK_OFFSET;w++){
+    const ws=weekStart(w);
+    for(let si=0;si<slots.length;si++){
+      const slot=slots[si];
+      const cdate=cd(ws,slot.day);
+      if(cdate<=now)continue;
+      if(cdate>limitDate)continue;
+      if(currentCredits<=0){noCredits=true;break;}
+      const dateStr=ds(cdate);
+      try{
+        const existing=await sb('enrollments?class_id=eq.'+slot.classId+'&class_date=eq.'+dateStr+'&student_name=eq.'+encodeURIComponent(adminRecStudent.name)+'&select=id');
+        if(existing&&existing.length>0){skipped++;continue;}
+        const enrolledCount=await sb('enrollments?class_id=eq.'+slot.classId+'&class_date=eq.'+dateStr+'&select=id');
+        if(enrolledCount&&enrolledCount.length>=MAX_SPOTS){skipped++;continue;}
+        await sb('enrollments',{method:'POST',prefer:'return=minimal',body:JSON.stringify({class_id:slot.classId,class_date:dateStr,student_name:adminRecStudent.name})});
+        currentCredits--;
+        await sb('students?dni=eq.'+adminRecStudent.dni,{method:'PATCH',prefer:'return=minimal',body:JSON.stringify({credits:currentCredits})});
+        reserved++;
+      }catch(e){skipped++;}
+    }
+    if(noCredits)break;
+  }
+  adminRecStudent.credits=currentCredits;
+  let msg='<div class="recurrent-summary"><div class="recurrent-summary-title">✓ '+reserved+' clase'+(reserved!==1?'s':'')+' reservada'+(reserved!==1?'s':'')+'</div>';
+  if(skipped)msg+='<div style="margin-top:4px;font-size:12px">'+skipped+' omitida'+(skipped!==1?'s':'')+' (ya reservadas o sin lugar)</div>';
+  if(noCredits)msg+='<div style="margin-top:6px;color:#c0392b;font-size:12px">Se agotaron los créditos de '+adminRecStudent.name+'.</div>';
+  msg+='</div>';
+  result.innerHTML=msg;
+  renderAdminEnrollments();
 }
 
 function openTeacherModal(){renderTeacherPanel();document.getElementById('teacher-modal').style.display='flex';}
