@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0058)file:///C:/Users/Ricoe/Downloads/sportbox-profesor_13.html -->
+<!-- saved from url=(0058)file:///C:/Users/Ricoe/Downloads/sportbox-profesor_14.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
@@ -8,8 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="Sportbox">
 <meta name="theme-color" content="#7c6fa0">
 <title>Sportbox Pilates</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
+<style>*{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f0f0ee;min-height:100vh;-webkit-text-size-adjust:100%}
 .app-wrapper{max-width:700px;margin:0 auto;min-height:100vh;background:#fff;display:flex;flex-direction:column}
 .top-bar{background:#fff;border-bottom:1.5px solid #e0d8f0;padding:8px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:10}
@@ -20,77 +19,88 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .content{flex:1;padding:1rem}
 .date-nav{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
 .date-nav-btn{padding:5px 14px;border:1.5px solid #ccc;border-radius:8px;background:#fff;color:#333;font-size:16px;cursor:pointer;font-weight:500}
-.date-nav-btn:hover:not(:disabled){background:#f0f0ed;border-color:#7c6fa0;color:#7c6fa0}
-.date-nav-btn:disabled{opacity:0.25;cursor:default}
+.date-nav-btn:hover:not([disabled]){background:#f0f0ed;border-color:#7c6fa0;color:#7c6fa0}
+.date-nav-btn[disabled]{opacity:0.25;cursor:default}
 .teacher-date{flex:1;text-align:center;font-size:14px;color:#555;font-weight:500;text-transform:capitalize}
-.class-block{border-radius:12px;margin-bottom:1.2rem;overflow:hidden;border:2px solid #e0d8f0}
-.current-block{border-color:#7c6fa0;box-shadow:0 2px 12px rgba(124,111,160,0.15)}
-.next-block{border-color:#e0e0e0;opacity:0.9}
-.class-block-header{background:#7c6fa0;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.class-block{border-radius:12px;margin-bottom:1rem;overflow:hidden;border:2px solid #e0d8f0}
+.current-block{border-color:#7c6fa0;box-shadow:0 2px 12px rgba(124,111,160,0.12)}
+.past-block{border-color:#e0e0e0;opacity:0.75}
+.next-block{border-color:#e0e0e0}
+.class-block-header{padding:11px 16px;display:flex;align-items:center;justify-content:space-between}
+.current-block .class-block-header{background:#7c6fa0}
+.past-block .class-block-header{background:#bdbdbd}
 .next-block .class-block-header{background:#9e9e9e}
-.class-time-big{font-size:20px;font-weight:700;color:#fff}
-.class-count{font-size:13px;color:rgba(255,255,255,0.85);font-weight:500}
-.next-class-label{font-size:11px;font-weight:700;color:#9e9e9e;text-transform:uppercase;letter-spacing:0.8px;margin:0.5rem 0 0.3rem;padding-left:2px}
-.prev-note{background:#f5f5f2;border-left:3px solid #ccc;padding:7px 12px;font-size:12px;color:#888;margin:8px 12px;cursor:pointer;display:flex;align-items:center;gap:6px;border-radius:0 6px 6px 0}
+.class-time-big{font-size:18px;font-weight:700;color:#fff}
+.class-count{font-size:12px;color:rgba(255,255,255,0.85);font-weight:500}
+.class-section-label{font-size:10px;font-weight:700;color:#bbb;text-transform:uppercase;letter-spacing:0.8px;margin:0.6rem 0 0.2rem;padding-left:2px}
+.prev-note{border-left:3px solid #ddd;padding:6px 12px;font-size:12px;color:#999;margin:7px 12px;cursor:pointer;display:flex;align-items:center;gap:6px;border-radius:0 4px 4px 0;background:#fafaf8}
 .prev-note.has-note{background:#fff3e0;border-color:#fb8c00;color:#5d4037}
-.prev-note-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;flex-shrink:0}
-.prev-note-text{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prev-note-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;flex-shrink:0}
+.prev-note-text{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .prev-note.expanded .prev-note-text{white-space:normal}
-.attendance-hint{font-size:11px;color:#7c6fa0;padding:5px 12px;background:#f3e5f5;font-style:italic;text-align:center}
-.students-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding:12px}
-.student-card{background:var(--plan-bg,#f5f5f2);border:1.5px solid var(--plan-border,#ccc);border-radius:10px;padding:10px 12px;cursor:pointer;transition:opacity 0.15s;position:relative;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.attendance-hint{font-size:11px;color:#7c6fa0;padding:4px 12px;background:#f3e5f5;text-align:center}
+.students-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;padding:10px 12px}
+.student-card{background:var(--pb,#f5f5f2);border:1.5px solid var(--pd,#ccc);border-radius:10px;padding:9px 11px;cursor:pointer;transition:opacity 0.15s;position:relative;user-select:none;-webkit-user-select:none}
 .student-card:active{opacity:0.7}
-.student-card.absent{opacity:0.45;background:#f5f5f5 !important;border-color:#bbb !important}
-.next-card{cursor:default}
-.next-card:active{opacity:1}
-.student-name-card{font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:4px;line-height:1.2}
+.student-card.absent{opacity:0.4;background:#f5f5f5 !important;border-color:#bbb !important}
+.next-card,.past-card{cursor:default}
+.next-card:active,.past-card:active{opacity:1}
+.sname{font-size:12px;font-weight:600;color:#1a1a1a;margin-bottom:3px;line-height:1.2}
 .plan-badge{font-size:10px;font-weight:700;border-radius:99px;padding:2px 7px;display:inline-block}
 .trial-badge{font-size:10px;color:#e65100;font-weight:700;margin-top:2px}
 .absent-mark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.55);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px;pointer-events:none;white-space:nowrap}
-.note-section{padding:10px 12px;border-top:1px solid #eee;display:flex;gap:8px;align-items:center}
-.note-input{flex:1;padding:8px 10px;border:1.5px solid #ccc;border-radius:8px;font-size:13px;outline:none}
+.note-section{padding:9px 12px;border-top:1px solid #eee;display:flex;gap:7px;align-items:center}
+.note-input{flex:1;padding:7px 10px;border:1.5px solid #ccc;border-radius:8px;font-size:13px;outline:none}
 .note-input:focus{border-color:#7c6fa0}
-.note-save-btn{padding:7px 12px;border:none;border-radius:8px;background:#7c6fa0;color:#fff;font-size:12px;cursor:pointer;white-space:nowrap;font-weight:500}
-.empty-class{padding:1rem;text-align:center;color:#aaa;font-size:13px}
+.note-save-btn{padding:7px 12px;border:none;border-radius:8px;background:#7c6fa0;color:#fff;font-size:12px;cursor:pointer;font-weight:500;white-space:nowrap}
+.empty-class{padding:0.8rem;text-align:center;color:#aaa;font-size:13px}
 .no-class-msg{padding:2rem;text-align:center;color:#aaa;font-size:14px;border:1.5px dashed #ddd;border-radius:10px}
-.admin-tabs{display:grid;grid-template-columns:repeat(4,1fr);border:1.5px solid #ccc;border-radius:10px;overflow:hidden;margin-bottom:1.2rem}
-.admin-tab{padding:9px 4px;font-size:11px;border:none;background:#f0f0ed;color:#888;cursor:pointer;text-align:center;font-weight:500;border-right:1px solid #ddd;border-bottom:1px solid #ddd}
+.loading{padding:2rem;text-align:center;color:#aaa;font-size:14px}
+.admin-tabs{display:grid;grid-template-columns:repeat(5,1fr);border:1.5px solid #ccc;border-radius:10px;overflow:hidden;margin-bottom:1.2rem}
+.admin-tab{padding:9px 2px;font-size:10px;border:none;background:#f0f0ed;color:#888;cursor:pointer;text-align:center;font-weight:500;border-right:1px solid #ddd}
+.admin-tab:last-child{border-right:none}
 .admin-tab.active{background:#7c6fa0;color:#fff}
-.sync-info{background:#f5f5f2;border-radius:10px;padding:16px;margin-bottom:1rem;text-align:center}
+.sync-box{background:#f5f5f2;border-radius:10px;padding:16px;margin-bottom:1rem;text-align:center}
 .sync-num{font-size:36px;font-weight:700;color:#7c6fa0;display:block}
 .sync-label{font-size:13px;color:#888;margin-top:4px;display:block}
 .plan-breakdown{background:#fff;border:1.5px solid #eee;border-radius:10px;padding:12px;margin-bottom:1rem}
-.plan-row{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13px;color:#444}
+.plan-row{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13px;color:#333}
 .plan-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.sync-btn{width:100%;padding:11px;border:none;border-radius:10px;background:#4a4560;color:#fff;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:10px}
+.sync-btn{width:100%;padding:11px;border:none;border-radius:10px;background:#4a4560;color:#fff;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:8px}
 .sync-btn:hover{background:#5c5678}
 .sync-success{background:#edf7ed;border:1.5px solid #b8ddb9;border-radius:8px;padding:10px 14px;font-size:13px;color:#2d7a3a;font-weight:500}
 .sync-error{background:#fdf0ee;border:1.5px solid #f5c6c6;border-radius:8px;padding:10px 14px;font-size:13px;color:#c0392b}
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1rem}
-.stat-card{background:#f5f5f2;border-radius:10px;padding:14px;text-align:center}
-.stat-num{font-size:24px;font-weight:700;color:#4a4560}
-.stat-label{font-size:11px;color:#888;margin-top:4px}
-.stat-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.stat-bar-label{font-size:12px;color:#555;min-width:110px;font-weight:500}
-.stat-bar-wrap{flex:1;background:#eee;border-radius:99px;height:8px;overflow:hidden}
-.stat-bar{height:100%;border-radius:99px}
-.stat-bar-count{font-size:12px;color:#555;font-weight:600;min-width:24px;text-align:right}
-.ranking-row{display:flex;align-items:center;gap:10px;background:#fafaf8;border:1.5px solid #ddd;border-radius:10px;padding:10px 14px;margin-bottom:6px}
-.ranking-pos{font-size:16px;min-width:28px}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem}
+.stat-card{background:#f5f5f2;border-radius:10px;padding:12px;text-align:center}
+.stat-num{font-size:22px;font-weight:700;color:#4a4560}
+.stat-label{font-size:10px;color:#888;margin-top:3px}
+.section-title{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.8px;margin:1rem 0 8px}
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.bar-label{font-size:12px;color:#555;min-width:100px;font-weight:500}
+.bar-wrap{flex:1;background:#eee;border-radius:99px;height:8px;overflow:hidden}
+.bar-fill{height:100%;border-radius:99px}
+.bar-count{font-size:12px;color:#555;font-weight:600;min-width:28px;text-align:right}
+.student-list-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid #f0f0ee}
+.student-list-item:last-child{border-bottom:none}
+.sli-name{flex:1;font-size:13px;font-weight:600;color:#1a1a1a}
+.sli-sub{font-size:11px;color:#999;margin-top:1px}
+.sli-stat{text-align:right;font-size:12px;color:#7c6fa0;font-weight:600}
+.sli-stat-sub{font-size:10px;color:#bbb}
+.pct-bar{height:3px;border-radius:99px;margin-top:3px}
+.ranking-row{display:flex;align-items:center;gap:10px;background:#fafaf8;border:1.5px solid #ddd;border-radius:10px;padding:9px 14px;margin-bottom:6px}
+.ranking-pos{font-size:16px;min-width:28px;text-align:center}
 .ranking-name{flex:1;font-size:13px;font-weight:600;color:#1a1a1a}
-.plan-badge-small{font-size:10px;font-weight:700;border-radius:99px;padding:2px 7px}
-.ranking-abs{font-size:12px;color:#888}
-.log-date-header{font-size:11px;font-weight:700;color:#7c6fa0;text-transform:uppercase;letter-spacing:0.6px;margin:12px 0 6px}
-.log-row{display:flex;align-items:center;gap:12px;background:#fafaf8;border:1.5px solid #eee;border-radius:8px;padding:8px 12px;margin-bottom:4px}
-.log-time{font-size:13px;font-weight:600;color:#4a4560;min-width:60px}
-.log-name{font-size:13px;color:#333}
-.section-title{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px}
-.loading{padding:2rem;text-align:center;color:#aaa;font-size:14px}
-.no-classes{padding:2rem;text-align:center;color:#aaa;font-size:14px;border:1.5px dashed #ddd;border-radius:10px}
+.ranking-pct{font-size:12px;color:#7c6fa0;font-weight:600}
+.log-date-header{font-size:11px;font-weight:700;color:#7c6fa0;text-transform:uppercase;letter-spacing:0.5px;margin:10px 0 5px}
+.log-row{display:flex;align-items:center;gap:10px;background:#fafaf8;border:1.5px solid #eee;border-radius:8px;padding:7px 12px;margin-bottom:4px}
+.log-time{font-size:12px;font-weight:600;color:#4a4560;min-width:55px}
+.log-name{font-size:12px;color:#333;flex:1}
+.search-bar{width:100%;padding:8px 12px;border:1.5px solid #ccc;border-radius:8px;font-size:13px;outline:none;margin-bottom:10px}
+.search-bar:focus{border-color:#7c6fa0}
 .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center;padding:1rem}
 .modal-overlay.show{display:flex}
-.modal-box{background:#fff;border-radius:16px;width:100%;max-width:420px;max-height:80vh;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.2);display:flex;flex-direction:column}
-.modal-header{padding:14px 16px;border-bottom:1.5px solid #eee;display:flex;align-items:center;justify-content:space-between}
+.modal-box{background:#fff;border-radius:16px;width:100%;max-width:420px;max-height:82vh;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.2);display:flex;flex-direction:column}
+.modal-header{padding:13px 16px;border-bottom:1.5px solid #eee;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .modal-header h3{font-size:15px;font-weight:600;color:#1a1a1a}
 .modal-close-btn{background:none;border:none;font-size:22px;color:#aaa;cursor:pointer;line-height:1;padding:0}
 .modal-body{padding:1rem;overflow-y:auto}
@@ -100,20 +110,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .admin-login-box input:focus{border-color:#7c6fa0}
 .admin-login-box button{width:100%;padding:10px;border:none;border-radius:10px;background:#4a4560;color:#fff;font-size:14px;cursor:pointer;font-weight:500}
 .error-msg{font-size:12px;color:#c0392b;margin-bottom:8px;font-weight:500}
-.history-stat-row{display:flex;gap:10px;margin-bottom:1rem}
-.history-stat{flex:1;background:#f5f5f2;border-radius:8px;padding:10px;text-align:center}
-.history-stat-num{font-size:22px;font-weight:700;color:#4a4560}
-.history-stat-label{font-size:11px;color:#888;margin-top:2px}
-.history-entry{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0ee;font-size:13px}
-.history-entry:last-child{border-bottom:none}
-.history-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.history-dot.absent{background:#c0392b}
-.history-entry-date{color:#666;min-width:90px}
-.history-entry-time{color:#999;font-size:12px}
+.hstat-row{display:flex;gap:8px;margin-bottom:1rem}
+.hstat{flex:1;background:#f5f5f2;border-radius:8px;padding:10px;text-align:center}
+.hstat-num{font-size:20px;font-weight:700;color:#4a4560}
+.hstat-label{font-size:10px;color:#888;margin-top:2px}
+.hentry{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #f0f0ee;font-size:12px}
+.hentry:last-child{border-bottom:none}
+.hdot{width:8px;height:8px;border-radius:50%;flex-shrink:0;background:#c0392b}
+.hdate{color:#666;min-width:85px}
+.htime{color:#bbb}
 .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:#4a4560;color:#fff;border-radius:10px;padding:10px 22px;font-size:13px;font-weight:500;opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:999;white-space:nowrap}
 .toast.show{opacity:1}
-@media(max-width:480px){.students-grid{grid-template-columns:repeat(2,1fr)}.stats-grid{grid-template-columns:repeat(2,1fr)}.content{padding:0.8rem}}
-</style>
+@media(max-width:480px){.students-grid{grid-template-columns:repeat(2,1fr)}.stats-grid{grid-template-columns:repeat(2,1fr)}.content{padding:0.7rem}.admin-tabs{grid-template-columns:repeat(5,1fr)}.admin-tab{font-size:9px}}</style>
 </head>
 <body>
 <div class="app-wrapper">
@@ -125,15 +133,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     </div>
   </div>
   <div class="content">
-    <div id="teacher-view"><div class="date-nav"><button class="date-nav-btn" onclick="changeDate(-1)" disabled="">‹</button><div class="teacher-date">Hoy — lunes, 30 de marzo</div><button class="date-nav-btn" onclick="changeDate(1)">›</button></div><div class="next-class-label">Próxima clase</div><div class="class-block next-block" data-time="9" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">9:00 hs</div><div class="class-count">3 alumnos</div></div><div class="prev-note" onclick="toggleNote(this)"><span class="prev-note-label">📌 Nota:</span><span class="prev-note-text"><span style="color:#ccc;font-style:italic">Sin nota</span></span></div><div class="students-grid"><div class="student-card next-card" data-name="CARLOS GALLARDO" data-time="9" style="--plan-bg:#e3f2fd;--plan-border:#1976d2;--plan-text:#0d47a1"><div class="student-name-card">CARLOS GALLARDO</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card next-card" data-name="FLORENCIA CUPE" data-time="9" style="--plan-bg:#e3f2fd;--plan-border:#1976d2;--plan-text:#0d47a1"><div class="student-name-card">FLORENCIA CUPE</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card next-card" data-name="MARIANA HORNO" data-time="9" style="--plan-bg:#e3f2fd;--plan-border:#1976d2;--plan-text:#0d47a1"><div class="student-name-card">MARIANA HORNO</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div></div></div><div class="next-class-label">Le sigue</div><div class="class-block next-block" data-time="10" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">10:00 hs</div><div class="class-count">2 alumnos</div></div><div class="prev-note" onclick="toggleNote(this)"><span class="prev-note-label">📌 Nota:</span><span class="prev-note-text"><span style="color:#ccc;font-style:italic">Sin nota</span></span></div><div class="students-grid"><div class="student-card next-card" data-name="GABRIELA AZNAR" data-time="10" style="--plan-bg:#e3f2fd;--plan-border:#1976d2;--plan-text:#0d47a1"><div class="student-name-card">GABRIELA AZNAR</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card next-card" data-name="MARIANA MUR" data-time="10" style="--plan-bg:#e3f2fd;--plan-border:#1976d2;--plan-text:#0d47a1"><div class="student-name-card">MARIANA MUR</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div></div></div></div>
+    <div id="teacher-view"><div class="date-nav"><button class="date-nav-btn" onclick="changeDate(-1)" disabled="">‹</button><div class="teacher-date">Hoy — lunes, 30 de marzo</div><button class="date-nav-btn" onclick="changeDate(1)">›</button></div><div class="class-section-label">Clase actual</div><div class="class-block current-block" data-time="9" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">9:00 hs</div><div class="class-count">3 alumnos</div></div><div class="prev-note" id="note-toggle-9"><span class="prev-note-label">📌</span><span class="prev-note-text"><em style="color:#ccc">Sin nota</em></span></div><div class="attendance-hint">Tap = ausente &nbsp;|&nbsp; Hold 1s = historial</div><div class="students-grid"><div class="student-card " data-name="CARLOS GALLARDO" data-time="9" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">CARLOS GALLARDO</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card " data-name="FLORENCIA CUPE" data-time="9" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">FLORENCIA CUPE</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card absent " data-name="MARIANA HORNO" data-time="9" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MARIANA HORNO</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div><div class="absent-mark">AUSENTE</div></div></div><div class="note-section"><input type="text" class="note-input" id="noteinput-9" placeholder="Nota para próxima clase..." value=""><button class="note-save-btn" data-time="9" data-day="1">Guardar</button></div></div><div class="class-section-label">Próximas</div><div class="class-block next-block" data-time="10" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">10:00 hs</div><div class="class-count">3 alumnos</div></div><div class="prev-note" id="note-toggle-10"><span class="prev-note-label">📌</span><span class="prev-note-text"><em style="color:#ccc">Sin nota</em></span></div><div class="students-grid"><div class="student-card next-card" data-name="EMILIANO RICO" data-time="10" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">EMILIANO RICO</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card next-card" data-name="GABRIELA AZNAR" data-time="10" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">GABRIELA AZNAR</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card next-card" data-name="MARIANA MUR" data-time="10" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MARIANA MUR</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div></div></div><div class="class-block next-block" data-time="14" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">14:00 hs</div><div class="class-count">3 alumnos</div></div><div class="prev-note" id="note-toggle-14"><span class="prev-note-label">📌</span><span class="prev-note-text"><em style="color:#ccc">Sin nota</em></span></div><div class="students-grid"><div class="student-card next-card" data-name="ANDREA VIGGIANI" data-time="14" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">ANDREA VIGGIANI</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card next-card" data-name="FLORENCIA ZANETTI" data-time="14" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">FLORENCIA ZANETTI</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card next-card" data-name="MARIA ZINGARETTI" data-time="14" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MARIA ZINGARETTI</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div></div></div><div class="class-block next-block" data-time="15" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">15:00 hs</div><div class="class-count">3 alumnos</div></div><div class="prev-note" id="note-toggle-15"><span class="prev-note-label">📌</span><span class="prev-note-text"><em style="color:#ccc">Sin nota</em></span></div><div class="students-grid"><div class="student-card next-card" data-name="BRENDA GENTILE" data-time="15" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">BRENDA GENTILE</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card next-card" data-name="MARIA LUZ SARMIENTO" data-time="15" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MARIA LUZ SARMIENTO</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card next-card" data-name="MILAGROS SARMIENTO" data-time="15" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MILAGROS SARMIENTO</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div></div></div><div class="class-block next-block" data-time="16" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">16:00 hs</div><div class="class-count">3 alumnos</div></div><div class="prev-note" id="note-toggle-16"><span class="prev-note-label">📌</span><span class="prev-note-text"><em style="color:#ccc">Sin nota</em></span></div><div class="students-grid"><div class="student-card next-card" data-name="GONZALO EGEA" data-time="16" style="--pb:#f3e5f5;--pd:#7b1fa2"><div class="sname">GONZALO EGEA</div><div class="plan-badge" style="background:#f3e5f5;color:#4a148c;border:1px solid #7b1fa2">Plan 3x</div></div><div class="student-card next-card" data-name="MARIA JOSE RAMOS" data-time="16" style="--pb:#e8f5e9;--pd:#388e3c"><div class="sname">MARIA JOSE RAMOS</div><div class="plan-badge" style="background:#e8f5e9;color:#1b5e20;border:1px solid #388e3c">Plan 2x</div></div><div class="student-card next-card" data-name="MARTINA VAZQUEZ" data-time="16" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MARTINA VAZQUEZ</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div></div></div></div>
     <div id="admin-view" style="display:none">
       <div class="admin-tabs">
         <button class="admin-tab active" id="adm-tab-sync" onclick="switchAdminTab(&#39;sync&#39;)">Alumnos</button>
+        <button class="admin-tab" id="adm-tab-students" onclick="switchAdminTab(&#39;students&#39;)">Lista</button>
         <button class="admin-tab" id="adm-tab-stats" onclick="switchAdminTab(&#39;stats&#39;)">Stats</button>
         <button class="admin-tab" id="adm-tab-ranking" onclick="switchAdminTab(&#39;ranking&#39;)">Ranking</button>
         <button class="admin-tab" id="adm-tab-log" onclick="switchAdminTab(&#39;log&#39;)">Ausencias</button>
       </div>
       <div id="adm-panel-sync"></div>
+      <div id="adm-panel-students" style="display:none"></div>
       <div id="adm-panel-stats" style="display:none"></div>
       <div id="adm-panel-ranking" style="display:none"></div>
       <div id="adm-panel-log" style="display:none"></div>
@@ -167,12 +177,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 
 const SB_URL='https://cpmcotfclagnvksfxshe.supabase.co';
 const SB_KEY='sb_publishable_37NrOGX6uuqMEMggt9FEMg_fPQ4yDVx';
-const SHEET_ID='10tQZVgDL4krzOsQVnTujuEE8KaE_Z7Go37QsCkZYZB0';
-const SERVICE_ACCOUNT_EMAIL='sportbox-pilates@sportbox-pilates-491522.iam.gserviceaccount.com';
 const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbyoJuaFFLGkPb6jZVbpX6bCGV2tmXlAs-s78jkLMtvVsMO_xNCUy80jua-8ifylTqLG/exec';
 const ADMIN_PASSWORD='sportbox2024';
 const DAYS_SHEET=['LUNES','MARTES','MIERCOLES','JUEVES','VIERNES','SABADO'];
-const TIMES=['8','9','10','11','12','13','14','15','16','17','18','19','20','21'];
+const TIMES=[8,9,10,11,12,13,14,15,16,17,18,19,20,21];
 
 let students={};
 let currentView='teacher';
@@ -194,51 +202,46 @@ function todayStr(){
   const d=new Date();d.setDate(d.getDate()+dateOffset);
   return d.toISOString().split('T')[0];
 }
-function getOffsetDate(){
-  const d=new Date();d.setDate(d.getDate()+dateOffset);return d;
-}
-function nowHour(){return new Date().getHours();}
-function todayDow(){
-  const d=new Date();d.setDate(d.getDate()+dateOffset);return d.getDay();
-}
-function fdDate(d){
-  return d.toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'});
+function getOffsetDate(){const d=new Date();d.setDate(d.getDate()+dateOffset);return d;}
+function nowHour(){return dateOffset===0?new Date().getHours():25;}
+function todayDow(){const d=new Date();d.setDate(d.getDate()+dateOffset);return d.getDay();}
+function fdDate(d){return d.toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'});}
+function fdShort(dateStr){
+  const d=new Date(dateStr+'T12:00:00');
+  return d.toLocaleDateString('es-AR',{weekday:'short',day:'numeric',month:'short'});
 }
 function changeDate(dir){
-  dateOffset+=dir;
-  if(dateOffset<0)dateOffset=0;
-  renderTeacherView();
+  dateOffset+=dir;if(dateOffset<0)dateOffset=0;renderTeacherView();
 }
 
 function getPlanColor(plan,isTrial){
-  if(isTrial)return{bg:'#fff9c4',border:'#f9a825',text:'#5d4037',label:'PRUEBA'};
-  if(plan===1)return{bg:'#e3f2fd',border:'#1976d2',text:'#0d47a1',label:'Plan 1x'};
-  if(plan===2)return{bg:'#e8f5e9',border:'#388e3c',text:'#1b5e20',label:'Plan 2x'};
-  if(plan===3)return{bg:'#f3e5f5',border:'#7b1fa2',text:'#4a148c',label:'Plan 3x'};
-  return{bg:'#f5f5f5',border:'#9e9e9e',text:'#424242',label:'?'};
+  if(isTrial)return{bg:'#fff9c4',bd:'#f9a825',tx:'#5d4037',label:'PRUEBA'};
+  if(plan===1)return{bg:'#e3f2fd',bd:'#1976d2',tx:'#0d47a1',label:'Plan 1x'};
+  if(plan===2)return{bg:'#e8f5e9',bd:'#388e3c',tx:'#1b5e20',label:'Plan 2x'};
+  if(plan===3)return{bg:'#f3e5f5',bd:'#7b1fa2',tx:'#4a148c',label:'Plan 3x'};
+  return{bg:'#f5f5f5',bd:'#9e9e9e',tx:'#424242',label:'?'};
 }
 
-function getStudentsForClass(dayName,timeStr){
+function getStudentsForClass(dayName,timeNum){
   return Object.values(students).filter(s=>{
     if(!s.schedule)return false;
-    return s.schedule.some(slot=>slot===dayName+'_'+timeStr);
+    return s.schedule.some(slot=>slot===dayName+'_'+timeNum);
   }).sort((a,b)=>a.name.localeCompare(b.name));
 }
 
 async function loadStudents(){
   try{
     const rows=await sb('students_v2?select=*');
-    students={};
-    (rows||[]).forEach(s=>{students[s.name]=s;});
+    students={};(rows||[]).forEach(s=>{students[s.name]=s;});
   }catch(e){console.log('loadStudents error:',e.message);students={};}
 }
 
 async function autoSync(){
   try{
-    const controller=new AbortController();
-    const timeout=setTimeout(()=>controller.abort(),10000);
-    const resp=await fetch(APPS_SCRIPT_URL,{signal:controller.signal});
-    clearTimeout(timeout);
+    const ctrl=new AbortController();
+    const t=setTimeout(()=>ctrl.abort(),12000);
+    const resp=await fetch(APPS_SCRIPT_URL,{signal:ctrl.signal});
+    clearTimeout(t);
     if(!resp.ok)return;
     const data=await resp.json();
     const parsed=parseSheet(data.values||[],data.backgrounds||[]);
@@ -246,93 +249,87 @@ async function autoSync(){
       await saveStudentsToSupabase(parsed);
       await loadStudents();
     }
-  }catch(e){console.log('Auto-sync error:',e.message);}
+  }catch(e){console.log('autoSync:',e.message);}
 }
 
-function isYellow(color){
-  if(!color)return false;
-  return color.toLowerCase()==='#ffff00';
-}
+function isYellow(c){return c&&c.toLowerCase()==='#ffff00';}
 
-function parseSheet(rows,backgrounds){
-  backgrounds=backgrounds||[];
-  let headerRowIdx=-1;
-  let dayColMap={};
+function parseSheet(rows,bgs){
+  bgs=bgs||[];
+  let hRow=-1,dayColMap={};
   for(let i=0;i<rows.length;i++){
     const row=rows[i]||[];
     for(let j=0;j<row.length;j++){
       if((row[j]||'').toString().trim().toUpperCase()==='LUNES'){
-        headerRowIdx=i;
+        hRow=i;
         row.forEach((c,idx)=>{
           const d=(c||'').toString().trim().toUpperCase();
           if(DAYS_SHEET.includes(d))dayColMap[d]=idx;
-        });
-        break;
+        });break;
       }
     }
-    if(headerRowIdx>=0)break;
+    if(hRow>=0)break;
   }
-  if(headerRowIdx<0)return{};
+  if(hRow<0)return{};
 
   const result={};
-  let currentTime=null;
-  let rowsInSlot=0;
-  const ROWS_PER_SLOT=6;
-
-  for(let i=headerRowIdx+1;i<rows.length;i++){
+  let curTime=null,rowsInSlot=0;
+  for(let i=hRow+1;i<rows.length;i++){
     const row=rows[i]||[];
-    let foundTime=false;
+    let found=false;
     for(let j=0;j<3;j++){
-      const m=(row[j]||'').toString().trim().toUpperCase().match(/^(\d+)\s*HS/i);
-      if(m){currentTime=m[1];rowsInSlot=0;foundTime=true;break;}
+      const m=(row[j]||'').toString().trim().match(/^(\d+)\s*HS/i);
+      if(m){curTime=m[1];rowsInSlot=0;found=true;break;}
     }
-    if(!foundTime)rowsInSlot++;
-    if(rowsInSlot>ROWS_PER_SLOT)currentTime=null;
-    if(!currentTime)continue;
-
-    Object.entries(dayColMap).forEach(([day,colIdx])=>{
-      const val=(row[colIdx]||'').toString().trim();
+    if(!found)rowsInSlot++;
+    if(rowsInSlot>6)curTime=null;
+    if(!curTime)continue;
+    Object.entries(dayColMap).forEach(([day,col])=>{
+      const val=(row[col]||'').toString().trim();
       if(!val||val==='0')return;
       const name=val.toUpperCase().trim();
-      if(name.length<2||DAYS_SHEET.includes(name)||name==='TURNO'||name.includes('CLIENTE'))return;
-      const bg=(backgrounds[i]&&backgrounds[i][colIdx])||'';
-      const trial=isYellow(bg);
+      if(name.length<2||DAYS_SHEET.includes(name)||name==='TURNO'||name.includes('CLIENTE')||name==='N')return;
+      const trial=isYellow((bgs[i]&&bgs[i][col])||'');
       if(!result[name])result[name]={name,schedule:[],is_trial:false};
       if(trial)result[name].is_trial=true;
-      const slot=day+'_'+currentTime;
+      const slot=day+'_'+curTime;
       if(!result[name].schedule.includes(slot))result[name].schedule.push(slot);
     });
   }
-
-  Object.values(result).forEach(s=>{
-    s.plan=s.schedule.length>=3?3:s.schedule.length===2?2:1;
-  });
+  Object.values(result).forEach(s=>{s.plan=s.schedule.length>=3?3:s.schedule.length===2?2:1;});
   return result;
 }
 
 async function saveStudentsToSupabase(parsed){
+  // Delete students no longer in sheet
+  const currentNames=Object.keys(parsed);
+  const existing=await sb('students_v2?select=name').catch(()=>[]);
+  const toDelete=(existing||[]).filter(s=>!currentNames.includes(s.name)).map(s=>s.name);
+  for(const name of toDelete){
+    await sb('students_v2?name=eq.'+encodeURIComponent(name),{method:'DELETE',prefer:'return=minimal'}).catch(()=>{});
+  }
+  // Upsert current students
   const upserts=Object.values(parsed).map(s=>({
     name:s.name,plan:s.plan,is_trial:s.is_trial,
     schedule:s.schedule,updated_at:new Date().toISOString()
   }));
   if(!upserts.length)return;
   for(let i=0;i<upserts.length;i+=50){
-    const batch=upserts.slice(i,i+50);
-    await sb('students_v2',{method:'POST',prefer:'resolution=merge-duplicates,return=minimal',body:JSON.stringify(batch)});
+    await sb('students_v2',{method:'POST',prefer:'resolution=merge-duplicates,return=minimal',body:JSON.stringify(upserts.slice(i,i+50))});
   }
 }
 
+// TEACHER VIEW
 async function renderTeacherView(){
   const container=document.getElementById('teacher-view');
   await loadStudents();
   const today=todayStr();
-  const todayLabel=fdDate(getOffsetDate());
   const isToday=dateOffset===0;
   const dow=todayDow();
 
   let html='<div class="date-nav">';
   html+='<button class="date-nav-btn" onclick="changeDate(-1)"'+(isToday?' disabled':'')+'>&#8249;</button>';
-  html+='<div class="teacher-date">'+(isToday?'Hoy &mdash; ':'')+todayLabel+'</div>';
+  html+='<div class="teacher-date">'+(isToday?'Hoy &mdash; ':'')+fdDate(getOffsetDate())+'</div>';
   html+='<button class="date-nav-btn" onclick="changeDate(1)">&#8250;</button>';
   html+='</div>';
 
@@ -343,47 +340,38 @@ async function renderTeacherView(){
 
   const dayName=DAYS_SHEET[dow-1];
   const hour=nowHour();
-  const allTimes=TIMES.map(Number).sort((a,b)=>a-b);
-  let shown=0;
 
-  if(isToday){
-    // Show current class if happening now
-    const currentTime=allTimes.find(t=>t===hour);
-    if(currentTime!==undefined){
-      const cls=getStudentsForClass(dayName,String(currentTime));
-      if(cls.length>0){
-        html+=await renderClassBlock(dayName,String(currentTime),today,'current');
-        shown++;
-      }
-    }
-    // Fill up to 2 shown with future classes
-    const needed=shown>0?1:2;
-    let added=0;
-    for(const t of allTimes.filter(t=>t>hour)){
-      if(added>=needed)break;
-      const cls=getStudentsForClass(dayName,String(t));
-      if(cls.length>0){
-        html+='<div class="next-class-label">'+(shown===0&&added===0?'Próxima clase':added===0?'Próxima clase':'Le sigue')+'</div>';
-        html+=await renderClassBlock(dayName,String(t),today,'next');
-        added++;shown++;
-      }
-    }
-  }else{
-    // Future day - show first 2 classes with students
-    let added=0;
-    for(const t of allTimes){
-      if(added>=2)break;
-      const cls=getStudentsForClass(dayName,String(t));
-      if(cls.length>0){
-        html+='<div class="next-class-label">'+(added===0?'Próxima clase':'Le sigue')+'</div>';
-        html+=await renderClassBlock(dayName,String(t),today,'next');
-        added++;shown++;
-      }
+  // Get ALL times that have students
+  const classesWithStudents=TIMES.filter(t=>getStudentsForClass(dayName,String(t)).length>0);
+
+  if(!classesWithStudents.length){
+    html+='<div class="no-class-msg">No hay clases programadas para este d\u00eda.</div>';
+    container.innerHTML=html;return;
+  }
+
+  // Classify each class
+  const past=classesWithStudents.filter(t=>t<hour);
+  const current=classesWithStudents.find(t=>t===hour);
+  const upcoming=classesWithStudents.filter(t=>t>hour);
+
+  // Show upcoming first, then current, then past
+  if(current!==undefined){
+    html+='<div class="class-section-label">Clase actual</div>';
+    html+=await renderClassBlock(dayName,String(current),today,'current');
+  }
+
+  if(upcoming.length){
+    html+='<div class="class-section-label">Pr\u00f3ximas</div>';
+    for(const t of upcoming){
+      html+=await renderClassBlock(dayName,String(t),today,'next');
     }
   }
 
-  if(shown===0){
-    html+='<div class="no-class-msg">No hay más clases para hoy.</div>';
+  if(past.length){
+    html+='<div class="class-section-label">Anteriores (editables)</div>';
+    for(const t of [...past].reverse()){
+      html+=await renderClassBlock(dayName,String(t),today,'past');
+    }
   }
 
   container.innerHTML=html;
@@ -400,45 +388,42 @@ async function renderClassBlock(dayName,timeStr,today,type){
   ]);
   const absentSet=new Set((attendance||[]).filter(a=>!a.present).map(a=>a.student_name));
   const noteText=noteRows&&noteRows.length?noteRows[0].note:'';
+  const blockClass=type==='current'?'current-block':type==='past'?'past-block':'next-block';
 
-  let html='<div class="class-block '+(type==='current'?'current-block':'next-block')+'" data-time="'+timeStr+'" data-day="'+dayName+'">';
+  let html='<div class="class-block '+blockClass+'" data-time="'+timeStr+'" data-day="'+dayName+'">';
   html+='<div class="class-block-header">';
   html+='<div class="class-time-big">'+timeStr+':00 hs</div>';
-  html+='<div class="class-count">'+classStudents.length+' alumnos</div>';
+  html+='<div class="class-count">'+classStudents.length+' alumnos'+(type==='past'?' &mdash; pasada':'')+'</div>';
   html+='</div>';
 
-  // Note display
-  html+='<div class="prev-note'+(noteText?' has-note':'')+'" onclick="toggleNote(this)">';
-  html+='<span class="prev-note-label">&#128204; Nota:</span>';
-  html+='<span class="prev-note-text">'+(noteText||'<span style="color:#ccc;font-style:italic">Sin nota</span>')+'</span>';
+  html+='<div class="prev-note'+(noteText?' has-note':'')+'" id="note-toggle-'+timeStr+'">';
+  html+='<span class="prev-note-label">&#128204;</span>';
+  html+='<span class="prev-note-text">'+(noteText||'<em style="color:#ccc">Sin nota</em>')+'</span>';
   html+='</div>';
 
-  if(type==='current'){
-    html+='<div class="attendance-hint">Tap = ausente &nbsp;|&nbsp; Hold = historial</div>';
+  if(type==='current'||type==='past'){
+    html+='<div class="attendance-hint">Tap = ausente &nbsp;|&nbsp; Hold 1s = historial</div>';
   }
 
-  if(classStudents.length===0){
-    html+='<div class="empty-class">Sin alumnos registrados.</div>';
-  }else{
-    html+='<div class="students-grid">';
-    classStudents.forEach(s=>{
-      const c=getPlanColor(s.plan,s.is_trial);
-      const isAbsent=absentSet.has(s.name);
-      html+='<div class="student-card'+(isAbsent?' absent':'')+(type==='next'?' next-card':'')+'"';
-      html+=' data-name="'+s.name+'" data-time="'+timeStr+'"';
-      html+=' style="--plan-bg:'+c.bg+';--plan-border:'+c.border+';--plan-text:'+c.text+'">';
-      html+='<div class="student-name-card">'+s.name+'</div>';
-      html+='<div class="plan-badge" style="background:'+c.bg+';color:'+c.text+';border:1px solid '+c.border+'">'+c.label+'</div>';
-      if(s.is_trial)html+='<div class="trial-badge">&#9733; PRUEBA</div>';
-      if(isAbsent)html+='<div class="absent-mark">AUSENTE</div>';
-      html+='</div>';
-    });
+  html+='<div class="students-grid">';
+  classStudents.forEach(s=>{
+    const c=getPlanColor(s.plan,s.is_trial);
+    const isAbsent=absentSet.has(s.name);
+    const cardType=type==='next'?'next-card':type==='past'?'past-card':'';
+    html+='<div class="student-card'+( isAbsent?' absent':'')+' '+cardType+'"';
+    html+=' data-name="'+s.name.replace(/"/g,'&quot;')+'" data-time="'+timeStr+'"';
+    html+=' style="--pb:'+c.bg+';--pd:'+c.bd+'">';
+    html+='<div class="sname">'+s.name+'</div>';
+    html+='<div class="plan-badge" style="background:'+c.bg+';color:'+c.tx+';border:1px solid '+c.bd+'">'+c.label+'</div>';
+    if(s.is_trial)html+='<div class="trial-badge">&#9733; PRUEBA</div>';
+    if(isAbsent)html+='<div class="absent-mark">AUSENTE</div>';
     html+='</div>';
-  }
+  });
+  html+='</div>';
 
-  if(type==='current'){
+  if(type==='current'||type==='past'){
     html+='<div class="note-section">';
-    html+='<input type="text" class="note-input" id="note-'+timeStr+'" placeholder="Nota para próxima clase..." value="'+noteText+'">';
+    html+='<input type="text" class="note-input" id="noteinput-'+timeStr+'" placeholder="Nota para pr\u00f3xima clase..." value="'+noteText.replace(/"/g,'&quot;')+'">';
     html+='<button class="note-save-btn" data-time="'+timeStr+'" data-day="'+dayNum+'">Guardar</button>';
     html+='</div>';
   }
@@ -449,34 +434,30 @@ async function renderClassBlock(dayName,timeStr,today,type){
 function attachNoteHandlers(){
   document.querySelectorAll('.note-save-btn').forEach(btn=>{
     btn.onclick=function(){
-      const time=this.getAttribute('data-time');
-      const day=parseInt(this.getAttribute('data-day'));
-      saveNote(time,day);
+      saveNote(this.dataset.time,parseInt(this.dataset.day));
     };
+  });
+  document.querySelectorAll('[id^="note-toggle-"]').forEach(el=>{
+    el.onclick=function(){this.classList.toggle('expanded');};
   });
 }
 
 function attachAttendanceHandlers(){
   document.querySelectorAll('.student-card:not(.next-card)').forEach(card=>{
-    let holdTimer=null;
-    let holding=false;
-    card.addEventListener('mousedown',()=>{
+    let holdTimer=null,holding=false;
+    const startHold=()=>{
       holding=false;
-      holdTimer=setTimeout(()=>{holding=true;showStudentHistory(card.getAttribute('data-name'));},600);
-    });
-    card.addEventListener('touchstart',()=>{
-      holding=false;
-      holdTimer=setTimeout(()=>{holding=true;showStudentHistory(card.getAttribute('data-name'));},600);
-    },{passive:true});
-    const cancel=()=>clearTimeout(holdTimer);
-    card.addEventListener('mouseup',cancel);
-    card.addEventListener('touchend',cancel);
-    card.addEventListener('mouseleave',cancel);
+      holdTimer=setTimeout(()=>{holding=true;showStudentHistory(card.dataset.name);},700);
+    };
+    const cancelHold=()=>clearTimeout(holdTimer);
+    card.addEventListener('mousedown',startHold);
+    card.addEventListener('touchstart',startHold,{passive:true});
+    card.addEventListener('mouseup',cancelHold);
+    card.addEventListener('touchend',cancelHold);
+    card.addEventListener('mouseleave',cancelHold);
     card.addEventListener('click',async function(){
       if(holding)return;
-      const name=this.getAttribute('data-name');
-      const time=this.getAttribute('data-time');
-      const today=todayStr();
+      const name=this.dataset.name,time=this.dataset.time,today=todayStr();
       const isAbsent=this.classList.contains('absent');
       try{
         if(isAbsent){
@@ -487,9 +468,7 @@ function attachAttendanceHandlers(){
           await sb('attendance',{method:'POST',prefer:'return=minimal',body:JSON.stringify({class_date:today,class_time:time,student_name:name,present:false})});
           this.classList.add('absent');
           if(!this.querySelector('.absent-mark')){
-            const m=document.createElement('div');
-            m.className='absent-mark';m.textContent='AUSENTE';
-            this.appendChild(m);
+            const m=document.createElement('div');m.className='absent-mark';m.textContent='AUSENTE';this.appendChild(m);
           }
         }
       }catch(e){showToast('Error al registrar.');}
@@ -499,34 +478,35 @@ function attachAttendanceHandlers(){
 
 async function showStudentHistory(name){
   const rows=await sb('attendance?student_name=eq.'+encodeURIComponent(name)+'&present=eq.false&select=*&order=class_date.desc&limit=30').catch(()=>[]);
-  const s=students[name]||{};
-  const c=getPlanColor(s.plan,s.is_trial);
-  let html='<div class="history-stat-row">';
-  html+='<div class="history-stat"><div class="history-stat-num">'+(rows||[]).length+'</div><div class="history-stat-label">Ausencias</div></div>';
-  html+='<div class="history-stat"><div class="history-stat-num" style="font-size:14px;padding-top:4px;color:'+c.text+'">'+c.label+'</div><div class="history-stat-label">Plan</div></div>';
+  const s=students[name]||{};const c=getPlanColor(s.plan,s.is_trial);
+  const absences=(rows||[]).length;
+  const totalScheduled=s.schedule?s.schedule.length*4:0; // approx monthly
+  const pct=totalScheduled>0?Math.max(0,Math.round((1-absences/totalScheduled)*100)):100;
+  let html='<div class="hstat-row">';
+  html+='<div class="hstat"><div class="hstat-num">'+absences+'</div><div class="hstat-label">Ausencias</div></div>';
+  html+='<div class="hstat"><div class="hstat-num">'+pct+'%</div><div class="hstat-label">Asistencia est.</div></div>';
+  html+='<div class="hstat"><div class="hstat-num" style="font-size:14px;padding-top:4px;color:'+c.tx+'">'+c.label+'</div><div class="hstat-label">Plan</div></div>';
   html+='</div>';
   if(!rows||!rows.length){
-    html+='<div style="text-align:center;color:#aaa;padding:1rem;font-size:13px">Sin ausencias registradas &#10003;</div>';
+    html+='<div style="text-align:center;color:#aaa;padding:1rem;font-size:13px">&#10003; Sin ausencias registradas</div>';
   }else{
     rows.forEach(r=>{
-      const d=new Date(r.class_date+'T12:00:00');
-      const dateStr=d.toLocaleDateString('es-AR',{weekday:'short',day:'numeric',month:'short'});
-      html+='<div class="history-entry"><div class="history-dot absent"></div><div class="history-entry-date">'+dateStr+'</div><div class="history-entry-time">'+r.class_time+':00 hs</div></div>';
+      html+='<div class="hentry"><div class="hdot"></div><div class="hdate">'+fdShort(r.class_date)+'</div><div class="htime">'+r.class_time+':00 hs</div></div>';
     });
   }
   document.getElementById('history-modal-name').textContent=name;
   document.getElementById('history-modal-body').innerHTML=html;
   document.getElementById('history-modal').classList.add('show');
 }
-
 function closeHistoryModal(){document.getElementById('history-modal').classList.remove('show');}
 
 async function saveNote(timeStr,dayNum){
-  const input=document.getElementById('note-'+timeStr);
+  const input=document.getElementById('noteinput-'+timeStr);
+  if(!input)return;
   const note=input.value.trim();
   try{
-    const existing=await sb('class_notes?class_time=eq.'+timeStr+'&class_day=eq.'+dayNum+'&select=id');
-    if(existing&&existing.length>0){
+    const ex=await sb('class_notes?class_time=eq.'+timeStr+'&class_day=eq.'+dayNum+'&select=id').catch(()=>[]);
+    if(ex&&ex.length>0){
       await sb('class_notes?class_time=eq.'+timeStr+'&class_day=eq.'+dayNum,{method:'PATCH',prefer:'return=minimal',body:JSON.stringify({note})});
     }else{
       await sb('class_notes',{method:'POST',prefer:'return=minimal',body:JSON.stringify({class_time:timeStr,class_day:dayNum,note})});
@@ -535,6 +515,7 @@ async function saveNote(timeStr,dayNum){
   }catch(e){showToast('Error al guardar nota.');}
 }
 
+// ADMIN VIEW
 function showView(view){
   document.getElementById('teacher-view').style.display=view==='teacher'?'block':'none';
   document.getElementById('admin-view').style.display=view==='admin'?'block':'none';
@@ -555,28 +536,25 @@ function closeAdminLogin(){
 }
 function doAdminLogin(){
   if(document.getElementById('admin-pwd').value===ADMIN_PASSWORD){
-    adminLoggedIn=true;
-    closeAdminLogin();
-    showView('admin');
-    renderAdminView();
+    adminLoggedIn=true;closeAdminLogin();showView('admin');renderAdminView();
   }else{
-    document.getElementById('admin-login-error').textContent='Contraseña incorrecta.';
+    document.getElementById('admin-login-error').textContent='Contrase\u00f1a incorrecta.';
   }
 }
 
 async function renderAdminView(){
-  await loadStudents();
-  switchAdminTab('sync');
+  await loadStudents();switchAdminTab('sync');
 }
 
 function switchAdminTab(tab){
-  ['sync','stats','ranking','log'].forEach(t=>{
-    const btn=document.getElementById('adm-tab-'+t);
-    const panel=document.getElementById('adm-panel-'+t);
-    if(btn)btn.classList.toggle('active',t===tab);
-    if(panel)panel.style.display=t===tab?'block':'none';
+  ['sync','students','stats','ranking','log'].forEach(t=>{
+    const b=document.getElementById('adm-tab-'+t);
+    const p=document.getElementById('adm-panel-'+t);
+    if(b)b.classList.toggle('active',t===tab);
+    if(p)p.style.display=t===tab?'block':'none';
   });
   if(tab==='sync')renderSyncPanel();
+  if(tab==='students')renderStudentList();
   if(tab==='stats')renderStats();
   if(tab==='ranking')renderRanking();
   if(tab==='log')renderAttendanceLog();
@@ -586,12 +564,11 @@ async function renderSyncPanel(){
   const count=Object.keys(students).length;
   const plans={1:0,2:0,3:0,trial:0};
   Object.values(students).forEach(s=>{if(s.is_trial)plans.trial++;else plans[s.plan]=(plans[s.plan]||0)+1;});
-  let html='<div class="sync-info"><span class="sync-num">'+count+'</span><span class="sync-label">Alumnos en sistema</span></div>';
+  let html='<div class="sync-box"><span class="sync-num">'+count+'</span><span class="sync-label">Alumnos en sistema</span></div>';
   html+='<div class="plan-breakdown">';
-  html+='<div class="plan-row"><span class="plan-dot" style="background:#1976d2"></span>Plan 1x semana: <strong>'+plans[1]+'</strong></div>';
-  html+='<div class="plan-row"><span class="plan-dot" style="background:#388e3c"></span>Plan 2x semana: <strong>'+plans[2]+'</strong></div>';
-  html+='<div class="plan-row"><span class="plan-dot" style="background:#7b1fa2"></span>Plan 3x semana: <strong>'+plans[3]+'</strong></div>';
-  html+='<div class="plan-row"><span class="plan-dot" style="background:#f9a825"></span>Clase de prueba: <strong>'+plans.trial+'</strong></div>';
+  [{c:'#1976d2',l:'Plan 1x semana',n:plans[1]},{c:'#388e3c',l:'Plan 2x semana',n:plans[2]},{c:'#7b1fa2',l:'Plan 3x semana',n:plans[3]},{c:'#f9a825',l:'Clase de prueba',n:plans.trial}].forEach(p=>{
+    html+='<div class="plan-row"><span class="plan-dot" style="background:'+p.c+'"></span>'+p.l+': <strong>'+p.n+'</strong></div>';
+  });
   html+='</div>';
   html+='<button class="sync-btn" onclick="doSync()">&#8635; Sincronizar con Google Sheets</button>';
   html+='<div id="sync-result"></div>';
@@ -613,43 +590,121 @@ async function doSync(){
   }catch(e){res.innerHTML='<div class="sync-error">Error: '+e.message+'</div>';}
 }
 
+async function renderStudentList(){
+  const panel=document.getElementById('adm-panel-students');
+  panel.innerHTML='<div class="loading">Cargando...</div>';
+  const absRows=await sb('attendance?present=eq.false&select=student_name').catch(()=>[]);
+  const absCounts={};(absRows||[]).forEach(r=>{absCounts[r.student_name]=(absCounts[r.student_name]||0)+1;});
+  const sorted=Object.values(students).sort((a,b)=>a.name.localeCompare(b.name));
+  let searchHtml='<input type="text" class="search-bar" id="student-search-input" placeholder="Buscar alumno..." oninput="filterStudentList(this.value)">';
+  let listHtml='<div id="student-list-container">';
+  sorted.forEach(s=>{
+    const c=getPlanColor(s.plan,s.is_trial);
+    const abs=absCounts[s.name]||0;
+    const sched=s.schedule?s.schedule.length:0;
+    const pct=sched>0?Math.max(0,Math.round((1-(abs/(sched*4)))*100)):100;
+    const pctColor=pct>=80?'#27ae60':pct>=60?'#f39c12':'#c0392b';
+    listHtml+='<div class="student-list-item" data-name="'+s.name.toLowerCase()+'">';
+    listHtml+='<div style="flex:1"><div class="sli-name">'+s.name+'</div>';
+    listHtml+='<div class="sli-sub"><span class="plan-badge" style="background:'+c.bg+';color:'+c.tx+';border:1px solid '+c.bd+'">'+c.label+'</span></div></div>';
+    listHtml+='<div class="sli-stat">'+pct+'%<div class="sli-stat-sub">'+abs+' aus.</div>';
+    listHtml+='<div class="pct-bar" style="width:50px;background:#eee"><div class="pct-bar" style="width:'+pct+'%;background:'+pctColor+'"></div></div></div>';
+    listHtml+='</div>';
+  });
+  listHtml+='</div>';
+  panel.innerHTML=searchHtml+listHtml;
+}
+
+function filterStudentList(q){
+  document.querySelectorAll('.student-list-item').forEach(el=>{
+    el.style.display=el.dataset.name.includes(q.toLowerCase())?'flex':'none';
+  });
+}
+
 async function renderStats(){
-  const today=todayStr();
-  const rows=await sb('attendance?present=eq.false&class_date=lte.'+today+'&select=*&limit=1000').catch(()=>[]);
-  const absentCount=(rows||[]).length;
+  const panel=document.getElementById('adm-panel-stats');
+  panel.innerHTML='<div class="loading">Cargando...</div>';
+  const rows=await sb('attendance?present=eq.false&select=*&limit=2000').catch(()=>[]);
+  const total=Object.keys(students).length;
   const plans={1:0,2:0,3:0,trial:0};
   Object.values(students).forEach(s=>{if(s.is_trial)plans.trial++;else plans[s.plan]=(plans[s.plan]||0)+1;});
-  const total=Object.keys(students).length||1;
-  let html='<div class="stats-grid">';
-  html+='<div class="stat-card"><div class="stat-num">'+total+'</div><div class="stat-label">Alumnos</div></div>';
-  html+='<div class="stat-card"><div class="stat-num">'+absentCount+'</div><div class="stat-label">Ausencias registradas</div></div>';
-  html+='<div class="stat-card"><div class="stat-num">'+plans.trial+'</div><div class="stat-label">Clases de prueba</div></div>';
-  html+='</div>';
-  html+='<div class="section-title" style="margin-top:1rem">Por plan</div>';
-  [{label:'Plan 1x',count:plans[1],color:'#1976d2'},{label:'Plan 2x',count:plans[2],color:'#388e3c'},{label:'Plan 3x',count:plans[3],color:'#7b1fa2'}].forEach(p=>{
-    const pct=Math.round((p.count/total)*100);
-    html+='<div class="stat-bar-row"><span class="stat-bar-label">'+p.label+'</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:'+pct+'%;background:'+p.color+'"></div></div><span class="stat-bar-count">'+p.count+'</span></div>';
+  
+  // Classes with most absences
+  const byClass={};
+  (rows||[]).forEach(r=>{
+    const k=r.class_time+'hs';byClass[k]=(byClass[k]||0)+1;
   });
-  document.getElementById('adm-panel-stats').innerHTML=html;
+  const byDay={};
+  (rows||[]).forEach(r=>{
+    const d=new Date(r.class_date+'T12:00:00').toLocaleDateString('es-AR',{weekday:'long'});
+    byDay[d]=(byDay[d]||0)+1;
+  });
+
+  let html='<div class="stats-grid">';
+  html+='<div class="stat-card"><div class="stat-num">'+total+'</div><div class="stat-label">Alumnos activos</div></div>';
+  html+='<div class="stat-card"><div class="stat-num">'+(rows||[]).length+'</div><div class="stat-label">Ausencias registradas</div></div>';
+  html+='<div class="stat-card"><div class="stat-num">'+plans.trial+'</div><div class="stat-label">En prueba</div></div>';
+  html+='</div>';
+
+  html+='<div class="section-title">Distribuci\u00f3n por plan</div>';
+  [{l:'Plan 1x',n:plans[1],c:'#1976d2'},{l:'Plan 2x',n:plans[2],c:'#388e3c'},{l:'Plan 3x',n:plans[3],c:'#7b1fa2'},{l:'Prueba',n:plans.trial,c:'#f9a825'}].forEach(p=>{
+    const pct=total>0?Math.round((p.n/total)*100):0;
+    html+='<div class="bar-row"><span class="bar-label">'+p.l+'</span><div class="bar-wrap"><div class="bar-fill" style="width:'+pct+'%;background:'+p.c+'"></div></div><span class="bar-count">'+p.n+'</span></div>';
+  });
+
+  // Absences by time
+  const topTimes=Object.entries(byClass).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  if(topTimes.length){
+    html+='<div class="section-title">Horarios con m\u00e1s ausencias</div>';
+    const maxAbs=topTimes[0][1]||1;
+    topTimes.forEach(([t,n])=>{
+      html+='<div class="bar-row"><span class="bar-label">'+t+'</span><div class="bar-wrap"><div class="bar-fill" style="width:'+Math.round((n/maxAbs)*100)+'%;background:#7c6fa0"></div></div><span class="bar-count">'+n+'</span></div>';
+    });
+  }
+
+  // Absences by day
+  const topDays=Object.entries(byDay).sort((a,b)=>b[1]-a[1]);
+  if(topDays.length){
+    html+='<div class="section-title">Ausencias por d\u00eda</div>';
+    const maxD=topDays[0][1]||1;
+    topDays.forEach(([d,n])=>{
+      html+='<div class="bar-row"><span class="bar-label" style="text-transform:capitalize">'+d+'</span><div class="bar-wrap"><div class="bar-fill" style="width:'+Math.round((n/maxD)*100)+'%;background:#4a4560"></div></div><span class="bar-count">'+n+'</span></div>';
+    });
+  }
+
+  panel.innerHTML=html;
 }
 
 async function renderRanking(){
+  const panel=document.getElementById('adm-panel-ranking');
+  panel.innerHTML='<div class="loading">Cargando...</div>';
   const rows=await sb('attendance?present=eq.false&select=student_name').catch(()=>[]);
-  const counts={};
-  (rows||[]).forEach(r=>{counts[r.student_name]=(counts[r.student_name]||0)+1;});
-  const ranked=Object.keys(students).map(n=>({name:n,abs:counts[n]||0})).sort((a,b)=>a.abs-b.abs);
-  let html='<div class="section-title">Menos ausencias</div>';
+  const absCounts={};(rows||[]).forEach(r=>{absCounts[r.student_name]=(absCounts[r.student_name]||0)+1;});
+  const ranked=Object.values(students).map(s=>{
+    const abs=absCounts[s.name]||0;
+    const sched=s.schedule?s.schedule.length:1;
+    const pct=Math.max(0,Math.round((1-(abs/(sched*4)))*100));
+    return{...s,abs,pct};
+  }).sort((a,b)=>b.pct-a.pct||a.abs-b.abs);
+
+  let html='<div class="section-title">Mejor asistencia</div>';
   ranked.slice(0,20).forEach((s,i)=>{
     const medal=i===0?'&#129351;':i===1?'&#129352;':i===2?'&#129353;':'';
-    const c=getPlanColor(students[s.name]?.plan,students[s.name]?.is_trial);
-    html+='<div class="ranking-row"><span class="ranking-pos">'+(medal||'#'+(i+1))+'</span><span class="ranking-name">'+s.name+'</span><span class="plan-badge-small" style="background:'+c.bg+';color:'+c.text+';border:1px solid '+c.border+'">'+c.label+'</span><span class="ranking-abs">'+s.abs+' aus.</span></div>';
+    const c=getPlanColor(s.plan,s.is_trial);
+    const pctColor=s.pct>=80?'#27ae60':s.pct>=60?'#f39c12':'#c0392b';
+    html+='<div class="ranking-row"><span class="ranking-pos">'+(medal||'#'+(i+1))+'</span>';
+    html+='<div style="flex:1"><div class="ranking-name">'+s.name+'</div>';
+    html+='<span class="plan-badge" style="background:'+c.bg+';color:'+c.tx+';border:1px solid '+c.bd+'">'+c.label+'</span></div>';
+    html+='<div style="text-align:right"><div class="ranking-pct" style="color:'+pctColor+'">'+s.pct+'%</div><div style="font-size:10px;color:#bbb">'+s.abs+' aus.</div></div></div>';
   });
-  document.getElementById('adm-panel-ranking').innerHTML=html;
+  panel.innerHTML=html;
 }
 
 async function renderAttendanceLog(){
-  const rows=await sb('attendance?present=eq.false&select=*&order=class_date.desc&limit=100').catch(()=>[]);
-  if(!rows||!rows.length){document.getElementById('adm-panel-log').innerHTML='<div class="no-classes">Sin ausencias registradas.</div>';return;}
+  const panel=document.getElementById('adm-panel-log');
+  panel.innerHTML='<div class="loading">Cargando...</div>';
+  const rows=await sb('attendance?present=eq.false&select=*&order=class_date.desc&limit=150').catch(()=>[]);
+  if(!rows||!rows.length){panel.innerHTML='<div class="no-class-msg">Sin ausencias registradas.</div>';return;}
   let html='',lastDate='';
   rows.forEach(r=>{
     if(r.class_date!==lastDate){
@@ -659,25 +714,20 @@ async function renderAttendanceLog(){
     }
     html+='<div class="log-row"><span class="log-time">'+r.class_time+':00 hs</span><span class="log-name">'+r.student_name+'</span></div>';
   });
-  document.getElementById('adm-panel-log').innerHTML=html;
+  panel.innerHTML=html;
 }
 
-function toggleNote(el){el.classList.toggle('expanded');}
-
 function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),3000);
 }
 
 document.getElementById('btn-teacher').addEventListener('click',()=>showView('teacher'));
 document.getElementById('btn-admin').addEventListener('click',()=>{
-  if(!adminLoggedIn)showAdminLogin();
-  else showView('admin');
+  if(!adminLoggedIn)showAdminLogin();else showView('admin');
 });
 document.getElementById('admin-pwd').addEventListener('keydown',e=>{if(e.key==='Enter')doAdminLogin();});
 
-// Init: render immediately, sync in background
 renderTeacherView();
 autoSync().then(()=>{if(currentView==='teacher')renderTeacherView();}).catch(()=>{});
 setInterval(()=>{if(currentView==='teacher')renderTeacherView();},5*60*1000);
