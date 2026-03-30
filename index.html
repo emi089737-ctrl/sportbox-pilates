@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0058)file:///C:/Users/Ricoe/Downloads/sportbox-profesor_12.html -->
+<!-- saved from url=(0058)file:///C:/Users/Ricoe/Downloads/sportbox-profesor_13.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
@@ -125,7 +125,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     </div>
   </div>
   <div class="content">
-    <div id="teacher-view"><div class="loading">Cargando...</div></div>
+    <div id="teacher-view"><div class="date-nav"><button class="date-nav-btn" onclick="changeDate(-1)" disabled="">‹</button><div class="teacher-date">Hoy — lunes, 30 de marzo</div><button class="date-nav-btn" onclick="changeDate(1)">›</button></div><div class="next-class-label">Próxima clase</div><div class="class-block next-block" data-time="9" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">9:00 hs</div><div class="class-count">3 alumnos</div></div><div class="prev-note" onclick="toggleNote(this)"><span class="prev-note-label">📌 Nota:</span><span class="prev-note-text"><span style="color:#ccc;font-style:italic">Sin nota</span></span></div><div class="students-grid"><div class="student-card next-card" data-name="CARLOS GALLARDO" data-time="9" style="--plan-bg:#e3f2fd;--plan-border:#1976d2;--plan-text:#0d47a1"><div class="student-name-card">CARLOS GALLARDO</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card next-card" data-name="FLORENCIA CUPE" data-time="9" style="--plan-bg:#e3f2fd;--plan-border:#1976d2;--plan-text:#0d47a1"><div class="student-name-card">FLORENCIA CUPE</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card next-card" data-name="MARIANA HORNO" data-time="9" style="--plan-bg:#e3f2fd;--plan-border:#1976d2;--plan-text:#0d47a1"><div class="student-name-card">MARIANA HORNO</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div></div></div><div class="next-class-label">Le sigue</div><div class="class-block next-block" data-time="10" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">10:00 hs</div><div class="class-count">2 alumnos</div></div><div class="prev-note" onclick="toggleNote(this)"><span class="prev-note-label">📌 Nota:</span><span class="prev-note-text"><span style="color:#ccc;font-style:italic">Sin nota</span></span></div><div class="students-grid"><div class="student-card next-card" data-name="GABRIELA AZNAR" data-time="10" style="--plan-bg:#e3f2fd;--plan-border:#1976d2;--plan-text:#0d47a1"><div class="student-name-card">GABRIELA AZNAR</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card next-card" data-name="MARIANA MUR" data-time="10" style="--plan-bg:#e3f2fd;--plan-border:#1976d2;--plan-text:#0d47a1"><div class="student-name-card">MARIANA MUR</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div></div></div></div>
     <div id="admin-view" style="display:none">
       <div class="admin-tabs">
         <button class="admin-tab active" id="adm-tab-sync" onclick="switchAdminTab(&#39;sync&#39;)">Alumnos</button>
@@ -408,7 +408,7 @@ async function renderClassBlock(dayName,timeStr,today,type){
   html+='</div>';
 
   // Note display
-  html+='<div class="prev-note'+(noteText?' has-note':'')+'" onclick="this.classList.toggle('expanded')">';
+  html+='<div class="prev-note'+(noteText?' has-note':'')+'" onclick="toggleNote(this)">';
   html+='<span class="prev-note-label">&#128204; Nota:</span>';
   html+='<span class="prev-note-text">'+(noteText||'<span style="color:#ccc;font-style:italic">Sin nota</span>')+'</span>';
   html+='</div>';
@@ -661,6 +661,8 @@ async function renderAttendanceLog(){
   });
   document.getElementById('adm-panel-log').innerHTML=html;
 }
+
+function toggleNote(el){el.classList.toggle('expanded');}
 
 function showToast(msg){
   const t=document.getElementById('toast');
