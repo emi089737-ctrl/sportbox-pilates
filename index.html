@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0058)file:///C:/Users/Ricoe/Downloads/sportbox-profesor_21.html -->
+<!-- saved from url=(0058)file:///C:/Users/Ricoe/Downloads/sportbox-profesor_23.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
@@ -135,6 +135,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .htime{color:#bbb}
 .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:#4a4560;color:#fff;border-radius:10px;padding:10px 22px;font-size:13px;font-weight:500;opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:999;white-space:nowrap}
 .toast.show{opacity:1}
+.add-person-btn{width:100%;margin:8px 12px 10px;width:calc(100% - 24px);padding:8px;border:1.5px dashed #7c6fa0;border-radius:8px;background:#f9f7ff;color:#7c6fa0;font-size:13px;cursor:pointer;font-weight:500;text-align:center}
+.add-person-btn:hover{background:#f0edf8}
+.add-person-form{margin:4px 12px 10px;display:flex;gap:6px;align-items:center}
+.add-person-input{flex:1;padding:8px 10px;border:1.5px solid #7c6fa0;border-radius:8px;font-size:13px;outline:none}
+.add-person-confirm{padding:8px 12px;border:none;border-radius:8px;background:#7c6fa0;color:#fff;font-size:12px;cursor:pointer;font-weight:500;white-space:nowrap}
+.add-person-cancel{padding:8px 10px;border:1.5px solid #ccc;border-radius:8px;background:#fff;color:#888;font-size:12px;cursor:pointer}
 @media(max-width:480px){.students-grid{grid-template-columns:repeat(2,1fr)}.stats-grid{grid-template-columns:repeat(2,1fr)}.content{padding:0.7rem}.changes-row{flex-wrap:wrap}.change-card{min-width:calc(50% - 4px)}}</style>
 </head>
 <body>
@@ -147,7 +153,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     </div>
   </div>
   <div class="content">
-    <div id="teacher-view"><div class="date-nav"><button class="date-nav-btn" onclick="changeDate(-1)" disabled="">‹</button><div class="teacher-date">Hoy — lunes, 30 de marzo</div><button class="date-nav-btn" onclick="changeDate(1)">›</button></div><div class="class-section-label">Clase actual</div><div class="class-block current-block" data-time="16" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">16:00 hs</div><div class="class-count">3 alumnos</div></div><div class="prev-note" id="note-toggle-16"><span class="prev-note-label">📌</span><span class="prev-note-text"><em style="color:#ccc">Sin nota</em></span></div><div class="attendance-hint">Tap = ausente &nbsp;|&nbsp; Hold 1s = historial</div><div class="students-grid"><div class="student-card" data-name="GONZALO EGEA" data-time="16" style="--pb:#f3e5f5;--pd:#7b1fa2"><div class="sname">GONZALO EGEA</div><div class="plan-badge" style="background:#f3e5f5;color:#4a148c;border:1px solid #7b1fa2">Plan 3x</div></div><div class="student-card" data-name="MARIA JOSE RAMOS" data-time="16" style="--pb:#e8f5e9;--pd:#388e3c"><div class="sname">MARIA JOSE RAMOS</div><div class="plan-badge" style="background:#e8f5e9;color:#1b5e20;border:1px solid #388e3c">Plan 2x</div></div><div class="student-card" data-name="MARTINA VAZQUEZ" data-time="16" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MARTINA VAZQUEZ</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div></div><div class="note-section"><input type="text" class="note-input" id="noteinput-16" placeholder="Nota para próxima clase..." value=""><button class="note-save-btn" data-time="16" data-day="1">Guardar</button></div></div><div class="class-section-label">Anteriores (editables)</div><div class="class-block past-block" data-time="15" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">15:00 hs</div><div class="class-count">4 alumnos — pasada</div></div><div class="prev-note" id="note-toggle-15"><span class="prev-note-label">📌</span><span class="prev-note-text"><em style="color:#ccc">Sin nota</em></span></div><div class="attendance-hint">Tap = ausente &nbsp;|&nbsp; Hold 1s = historial</div><div class="students-grid"><div class="student-card past-card" data-name="MARIA LUZ SARMIENTO" data-time="15" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MARIA LUZ SARMIENTO</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card past-card" data-name="MARIANA HORNO" data-time="15" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MARIANA HORNO</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card past-card" data-name="MILAGROS SARMIENTO" data-time="15" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MILAGROS SARMIENTO</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card absent past-card" data-name="SELVA ZUBRIGGEN" data-time="15" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">SELVA ZUBRIGGEN</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div><div class="absent-mark">AUSENTE</div></div></div><div class="note-section"><input type="text" class="note-input" id="noteinput-15" placeholder="Nota para próxima clase..." value=""><button class="note-save-btn" data-time="15" data-day="1">Guardar</button></div></div><div class="class-block past-block" data-time="14" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">14:00 hs</div><div class="class-count">3 alumnos — pasada</div></div><div class="prev-note" id="note-toggle-14"><span class="prev-note-label">📌</span><span class="prev-note-text"><em style="color:#ccc">Sin nota</em></span></div><div class="attendance-hint">Tap = ausente &nbsp;|&nbsp; Hold 1s = historial</div><div class="students-grid"><div class="student-card past-card" data-name="ANDREA VIGGIANI" data-time="14" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">ANDREA VIGGIANI</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card past-card" data-name="FLORENCIA ZANETTI" data-time="14" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">FLORENCIA ZANETTI</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card absent past-card" data-name="MARIA ZINGARETTI" data-time="14" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MARIA ZINGARETTI</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div><div class="absent-mark">AUSENTE</div></div></div><div class="note-section"><input type="text" class="note-input" id="noteinput-14" placeholder="Nota para próxima clase..." value=""><button class="note-save-btn" data-time="14" data-day="1">Guardar</button></div></div><div class="class-block past-block" data-time="10" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">10:00 hs</div><div class="class-count">2 alumnos — pasada</div></div><div class="prev-note" id="note-toggle-10"><span class="prev-note-label">📌</span><span class="prev-note-text"><em style="color:#ccc">Sin nota</em></span></div><div class="attendance-hint">Tap = ausente &nbsp;|&nbsp; Hold 1s = historial</div><div class="students-grid"><div class="student-card past-card" data-name="GABRIELA AZNAR" data-time="10" style="--pb:#e8f5e9;--pd:#388e3c"><div class="sname">GABRIELA AZNAR</div><div class="plan-badge" style="background:#e8f5e9;color:#1b5e20;border:1px solid #388e3c">Plan 2x</div></div><div class="student-card past-card" data-name="MARIANA MUR" data-time="10" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MARIANA MUR</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div></div><div class="note-section"><input type="text" class="note-input" id="noteinput-10" placeholder="Nota para próxima clase..." value=""><button class="note-save-btn" data-time="10" data-day="1">Guardar</button></div></div><div class="class-block past-block" data-time="9" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">9:00 hs</div><div class="class-count">2 alumnos — pasada</div></div><div class="prev-note" id="note-toggle-9"><span class="prev-note-label">📌</span><span class="prev-note-text"><em style="color:#ccc">Sin nota</em></span></div><div class="attendance-hint">Tap = ausente &nbsp;|&nbsp; Hold 1s = historial</div><div class="students-grid"><div class="student-card past-card" data-name="CARLOS GALLARDO" data-time="9" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">CARLOS GALLARDO</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card past-card" data-name="FLORENCIA CUPE" data-time="9" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">FLORENCIA CUPE</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div></div><div class="note-section"><input type="text" class="note-input" id="noteinput-9" placeholder="Nota para próxima clase..." value=""><button class="note-save-btn" data-time="9" data-day="1">Guardar</button></div></div></div>
+    <div id="teacher-view"><div class="date-nav"><button class="date-nav-btn" onclick="changeDate(-1)" disabled="">‹</button><div class="teacher-date">Hoy — lunes, 30 de marzo</div><button class="date-nav-btn" onclick="changeDate(1)">›</button></div><div class="class-section-label">Anteriores (editables)</div><div class="class-block past-block" data-time="16" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">16:00 hs</div><div class="class-count">3 alumnos — pasada</div></div><div class="prev-note" id="note-toggle-16"><span class="prev-note-label">📌</span><span class="prev-note-text"><em style="color:#ccc">Sin nota</em></span></div><div class="attendance-hint">Tap = ausente &nbsp;|&nbsp; Hold 1s = historial</div><div class="students-grid"><div class="student-card absent past-card" data-name="GONZALO EGEA" data-time="16" style="--pb:#f3e5f5;--pd:#7b1fa2"><div class="sname">GONZALO EGEA</div><div class="plan-badge" style="background:#f3e5f5;color:#4a148c;border:1px solid #7b1fa2">Plan 3x</div><div class="absent-mark">AUSENTE</div></div><div class="student-card past-card" data-name="MARIA JOSE RAMOS" data-time="16" style="--pb:#e8f5e9;--pd:#388e3c"><div class="sname">MARIA JOSE RAMOS</div><div class="plan-badge" style="background:#e8f5e9;color:#1b5e20;border:1px solid #388e3c">Plan 2x</div></div><div class="student-card past-card" data-name="MARTINA VAZQUEZ" data-time="16" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MARTINA VAZQUEZ</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div></div><button class="add-person-btn" id="addbtn-16" onclick="showAddPersonForm(this)" data-time="16">+ Sumar persona a esta clase</button><div class="add-person-form" id="add-form-16" style="display:none"><input type="text" class="add-person-input" id="add-input-16" placeholder="Nombre..."><button class="add-person-confirm" data-time="16" data-date="2026-03-30" onclick="confirmAddPerson(this)">Sumar</button><button class="add-person-cancel" data-time="16" onclick="hideAddPersonForm(this.dataset.time)">✕</button></div><div class="note-section"><input type="text" class="note-input" id="noteinput-16" placeholder="Nota para próxima clase..." value=""><button class="note-save-btn" data-time="16" data-day="1">Guardar</button></div></div><div class="class-block past-block" data-time="15" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">15:00 hs</div><div class="class-count">4 alumnos — pasada</div></div><div class="prev-note" id="note-toggle-15"><span class="prev-note-label">📌</span><span class="prev-note-text"><em style="color:#ccc">Sin nota</em></span></div><div class="attendance-hint">Tap = ausente &nbsp;|&nbsp; Hold 1s = historial</div><div class="students-grid"><div class="student-card past-card" data-name="MARIA LUZ SARMIENTO" data-time="15" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MARIA LUZ SARMIENTO</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card past-card" data-name="MARIANA HORNO" data-time="15" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MARIANA HORNO</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card past-card" data-name="MILAGROS SARMIENTO" data-time="15" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MILAGROS SARMIENTO</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card absent past-card" data-name="SELVA ZUBRIGGEN" data-time="15" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">SELVA ZUBRIGGEN</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div><div class="absent-mark">AUSENTE</div></div></div><button class="add-person-btn" id="addbtn-15" onclick="showAddPersonForm(this)" data-time="15">+ Sumar persona a esta clase</button><div class="add-person-form" id="add-form-15" style="display:none"><input type="text" class="add-person-input" id="add-input-15" placeholder="Nombre..."><button class="add-person-confirm" data-time="15" data-date="2026-03-30" onclick="confirmAddPerson(this)">Sumar</button><button class="add-person-cancel" data-time="15" onclick="hideAddPersonForm(this.dataset.time)">✕</button></div><div class="note-section"><input type="text" class="note-input" id="noteinput-15" placeholder="Nota para próxima clase..." value=""><button class="note-save-btn" data-time="15" data-day="1">Guardar</button></div></div><div class="class-block past-block" data-time="14" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">14:00 hs</div><div class="class-count">3 alumnos — pasada</div></div><div class="prev-note" id="note-toggle-14"><span class="prev-note-label">📌</span><span class="prev-note-text"><em style="color:#ccc">Sin nota</em></span></div><div class="attendance-hint">Tap = ausente &nbsp;|&nbsp; Hold 1s = historial</div><div class="students-grid"><div class="student-card past-card" data-name="ANDREA VIGGIANI" data-time="14" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">ANDREA VIGGIANI</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card past-card" data-name="FLORENCIA ZANETTI" data-time="14" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">FLORENCIA ZANETTI</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card absent past-card" data-name="MARIA ZINGARETTI" data-time="14" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MARIA ZINGARETTI</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div><div class="absent-mark">AUSENTE</div></div></div><button class="add-person-btn" id="addbtn-14" onclick="showAddPersonForm(this)" data-time="14">+ Sumar persona a esta clase</button><div class="add-person-form" id="add-form-14" style="display:none"><input type="text" class="add-person-input" id="add-input-14" placeholder="Nombre..."><button class="add-person-confirm" data-time="14" data-date="2026-03-30" onclick="confirmAddPerson(this)">Sumar</button><button class="add-person-cancel" data-time="14" onclick="hideAddPersonForm(this.dataset.time)">✕</button></div><div class="note-section"><input type="text" class="note-input" id="noteinput-14" placeholder="Nota para próxima clase..." value=""><button class="note-save-btn" data-time="14" data-day="1">Guardar</button></div></div><div class="class-block past-block" data-time="10" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">10:00 hs</div><div class="class-count">2 alumnos — pasada</div></div><div class="prev-note" id="note-toggle-10"><span class="prev-note-label">📌</span><span class="prev-note-text"><em style="color:#ccc">Sin nota</em></span></div><div class="attendance-hint">Tap = ausente &nbsp;|&nbsp; Hold 1s = historial</div><div class="students-grid"><div class="student-card past-card" data-name="GABRIELA AZNAR" data-time="10" style="--pb:#e8f5e9;--pd:#388e3c"><div class="sname">GABRIELA AZNAR</div><div class="plan-badge" style="background:#e8f5e9;color:#1b5e20;border:1px solid #388e3c">Plan 2x</div></div><div class="student-card past-card" data-name="MARIANA MUR" data-time="10" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">MARIANA MUR</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div></div><button class="add-person-btn" id="addbtn-10" onclick="showAddPersonForm(this)" data-time="10">+ Sumar persona a esta clase</button><div class="add-person-form" id="add-form-10" style="display:none"><input type="text" class="add-person-input" id="add-input-10" placeholder="Nombre..."><button class="add-person-confirm" data-time="10" data-date="2026-03-30" onclick="confirmAddPerson(this)">Sumar</button><button class="add-person-cancel" data-time="10" onclick="hideAddPersonForm(this.dataset.time)">✕</button></div><div class="note-section"><input type="text" class="note-input" id="noteinput-10" placeholder="Nota para próxima clase..." value=""><button class="note-save-btn" data-time="10" data-day="1">Guardar</button></div></div><div class="class-block past-block" data-time="9" data-day="LUNES"><div class="class-block-header"><div class="class-time-big">9:00 hs</div><div class="class-count">2 alumnos — pasada</div></div><div class="prev-note" id="note-toggle-9"><span class="prev-note-label">📌</span><span class="prev-note-text"><em style="color:#ccc">Sin nota</em></span></div><div class="attendance-hint">Tap = ausente &nbsp;|&nbsp; Hold 1s = historial</div><div class="students-grid"><div class="student-card past-card" data-name="CARLOS GALLARDO" data-time="9" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">CARLOS GALLARDO</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div><div class="student-card past-card" data-name="FLORENCIA CUPE" data-time="9" style="--pb:#e3f2fd;--pd:#1976d2"><div class="sname">FLORENCIA CUPE</div><div class="plan-badge" style="background:#e3f2fd;color:#0d47a1;border:1px solid #1976d2">Plan 1x</div></div></div><button class="add-person-btn" id="addbtn-9" onclick="showAddPersonForm(this)" data-time="9">+ Sumar persona a esta clase</button><div class="add-person-form" id="add-form-9" style="display:none"><input type="text" class="add-person-input" id="add-input-9" placeholder="Nombre..."><button class="add-person-confirm" data-time="9" data-date="2026-03-30" onclick="confirmAddPerson(this)">Sumar</button><button class="add-person-cancel" data-time="9" onclick="hideAddPersonForm(this.dataset.time)">✕</button></div><div class="note-section"><input type="text" class="note-input" id="noteinput-9" placeholder="Nota para próxima clase..." value=""><button class="note-save-btn" data-time="9" data-day="1">Guardar</button></div></div></div>
     <div id="admin-view" style="display:none">
       <div class="admin-tabs">
         <button class="admin-tab active" id="adm-tab-sync" onclick="switchAdminTab(&#39;sync&#39;)">Alumnos</button>
@@ -228,29 +234,30 @@ function getPlanColor(plan,isTrial){
 }
 
 function countElapsedClasses(student,altaDate){
-  // Count how many scheduled classes have actually occurred since the student's alta date
+  // If no alta date registered, we can't calculate accurately
+  if(!altaDate)return 0;
   if(!student.schedule||!student.schedule.length)return 0;
-  const start=altaDate?new Date(altaDate+'T00:00:00'):new Date();
-  const today=new Date();today.setHours(23,59,59,0);
+  const start=new Date(altaDate+'T00:00:00');
+  const today=new Date();
+  today.setHours(23,59,59,0);
   if(start>today)return 0;
   let count=0;
-  // Map DAYS_SHEET index to JS day number (0=Sun)
   const dayMap={'LUNES':1,'MARTES':2,'MIERCOLES':3,'JUEVES':4,'VIERNES':5,'SABADO':6};
   student.schedule.forEach(slot=>{
     const parts=slot.split('_');
     if(parts.length<2)return;
-    const dayName=parts[0];const hour=parseInt(parts[1]);
+    const dayName=parts[0];
+    const hour=parseInt(parts[1]);
     const targetDow=dayMap[dayName];
     if(targetDow===undefined)return;
-    // Walk from start date to today counting occurrences of this weekday
     const d=new Date(start);
-    // Advance to first occurrence of this weekday
+    // Advance to first occurrence of this weekday ON OR AFTER start date
     while(d.getDay()!==targetDow)d.setDate(d.getDate()+1);
     while(d<=today){
-      // Only count if the class time has passed today
-      if(d.toDateString()===today.toDateString()){
-        if(hour<=new Date().getHours())count++;
-      }else{
+      // For today: only count if the class hour has already passed
+      if(d.toDateString()===new Date().toDateString()){
+        if(hour<new Date().getHours())count++;
+      }else if(d<today){
         count++;
       }
       d.setDate(d.getDate()+7);
@@ -428,6 +435,12 @@ async function renderClassBlock(dayName,timeStr,today,type){
   });
   html+='</div>';
   if(type==='current'||type==='past'){
+    html+='<button class="add-person-btn" id="addbtn-'+timeStr+'" onclick="showAddPersonForm(this)" data-time="'+timeStr+'">+ Sumar persona a esta clase</button>';
+    html+='<div class="add-person-form" id="add-form-'+timeStr+'" style="display:none">';
+    html+='<input type="text" class="add-person-input" id="add-input-'+timeStr+'" placeholder="Nombre...">';
+    html+='<button class="add-person-confirm" data-time="'+timeStr+'" data-date="'+today+'" onclick="confirmAddPerson(this)">Sumar</button>';
+    html+='<button class="add-person-cancel" data-time="'+timeStr+'" onclick="hideAddPersonForm(this.dataset.time)">&#10005;</button>';
+    html+='</div>';
     html+='<div class="note-section">';
     html+='<input type="text" class="note-input" id="noteinput-'+timeStr+'" placeholder="Nota para pr\u00f3xima clase..." value="'+noteText.replace(/"/g,'&quot;')+'">';
     html+='<button class="note-save-btn" data-time="'+timeStr+'" data-day="'+dayNum+'">Guardar</button>';
@@ -481,11 +494,11 @@ async function showStudentHistory(name){
   const absences=(rows||[]).length;
   const altaRow=await sb('student_changes?change_type=eq.alta&student_name=eq.'+encodeURIComponent(name)+'&select=change_date&order=change_date.asc&limit=1').catch(()=>[]);
   const altaDate=altaRow&&altaRow.length?altaRow[0].change_date:null;
-  const elapsed=Math.max(1,countElapsedClasses(s,altaDate));
-  const pct=Math.max(0,Math.round(((elapsed-absences)/elapsed)*100));
+  const elapsed=countElapsedClasses(s,altaDate);
+  const pct=elapsed>0?Math.max(0,Math.round(((elapsed-absences)/elapsed)*100)):null;
   let html='<div class="hstat-row">';
   html+='<div class="hstat"><div class="hstat-num">'+absences+'</div><div class="hstat-label">Ausencias</div></div>';
-  html+='<div class="hstat"><div class="hstat-num">'+pct+'%</div><div class="hstat-label">Asistencia</div></div>';
+  html+='<div class="hstat"><div class="hstat-num">'+(pct!==null?pct+'%':'&#8212;')+'</div><div class="hstat-label">Asistencia</div></div>';
   html+='<div class="hstat"><div class="hstat-num" style="font-size:14px;padding-top:4px;color:'+c.tx+'">'+c.label+'</div><div class="hstat-label">Plan</div></div>';
   html+='</div>';
   if(!rows||!rows.length){
@@ -612,15 +625,15 @@ async function renderSyncPanel(){
     const c=getPlanColor(s.plan,s.is_trial);
     const abs=absCounts[s.name]||0;
     const altaDate=altaDates[s.name]||null;
-    const elapsed=Math.max(1,countElapsedClasses(s,altaDate));
-    const pct=Math.max(0,Math.round(((elapsed-abs)/elapsed)*100));
-    const pctColor=pct>=80?'#27ae60':pct>=60?'#f39c12':'#c0392b';
+    const elapsed=countElapsedClasses(s,altaDate);
+    const pct=elapsed>0?Math.max(0,Math.round(((elapsed-abs)/elapsed)*100)):null;
+    const pctColor=pct===null?'#ccc':pct>=80?'#27ae60':pct>=60?'#f39c12':'#c0392b';
     html+='<div class="student-list-item" data-name="'+s.name.toLowerCase()+'">';
     html+='<div style="flex:1"><div class="sli-name">'+s.name+'</div>';
     html+='<div class="sli-sub"><span class="plan-badge" style="background:'+c.bg+';color:'+c.tx+';border:1px solid '+c.bd+'">'+c.label+'</span></div></div>';
-    html+='<div class="sli-stat" style="color:'+pctColor+'">'+pct+'%';
+    html+='<div class="sli-stat" style="color:'+pctColor+'">'+(pct!==null?pct+'%':'&#8212;');
     html+='<div class="sli-stat-sub">'+abs+' aus.</div>';
-    html+='<div class="pct-bar-wrap"><div class="pct-bar-fill" style="width:'+pct+'%;background:'+pctColor+'"></div></div></div>';
+    html+='<div class="pct-bar-wrap"><div class="pct-bar-fill" style="width:'+(pct||0)+'%;background:'+pctColor+'"></div></div></div>';
     html+='</div>';
   });
   html+='</div>';
@@ -755,22 +768,22 @@ async function renderRanking(){
   const ranked=Object.values(students).map(s=>{
     const abs=absCounts[s.name]||0;
     const altaDate=altaDates[s.name]||null;
-    const totalClasses=Math.max(1,countElapsedClasses(s,altaDate));
-    const attended=Math.max(0,totalClasses-abs);
-    const pct=Math.max(0,Math.round((attended/totalClasses)*100));
+    const totalClasses=countElapsedClasses(s,altaDate);
+    const attended=totalClasses>0?Math.max(0,totalClasses-abs):null;
+    const pct=totalClasses>0?Math.max(0,Math.round((attended/totalClasses)*100)):null;
     return{...s,abs,attended,totalClasses,pct};
   }).sort((a,b)=>b.attended-a.attended||b.pct-a.pct);
   let html='<div class="section-title">Mayor asistencia</div>';
   ranked.slice(0,20).forEach((s,i)=>{
     const medal=i===0?'&#129351;':i===1?'&#129352;':i===2?'&#129353;':'';
     const c=getPlanColor(s.plan,s.is_trial);
-    const pctColor=s.pct>=80?'#27ae60':s.pct>=60?'#f39c12':'#c0392b';
+    const pctColor=s.pct===null?'#ccc':s.pct>=80?'#27ae60':s.pct>=60?'#f39c12':'#c0392b';
     html+='<div class="ranking-row"><span class="ranking-pos">'+(medal||'#'+(i+1))+'</span>';
     html+='<div style="flex:1"><div class="ranking-name">'+s.name+'</div>';
     html+='<span class="plan-badge" style="background:'+c.bg+';color:'+c.tx+';border:1px solid '+c.bd+'">'+c.label+'</span></div>';
     html+='<div style="text-align:right">';
-    html+='<div style="font-size:13px;font-weight:700;color:#4a4560">'+s.attended+' clases</div>';
-    html+='<div class="ranking-pct" style="color:'+pctColor+'">'+s.pct+'% &nbsp;<span style="font-size:10px;color:#bbb">'+s.abs+' aus.</span></div>';
+    html+='<div style="font-size:13px;font-weight:700;color:#4a4560">'+(s.attended!==null?s.attended+' clases':'sin datos')+'</div>';
+    html+='<div class="ranking-pct" style="color:'+pctColor+'">'+(s.pct!==null?s.pct+'%':'&#8212;')+'&nbsp;<span style="font-size:10px;color:#bbb">'+s.abs+' aus.</span></div>';
     html+='</div></div>';
   });
   panel.innerHTML=html;
@@ -812,6 +825,49 @@ async function deleteAbsence(id,name){
   }catch(e){showToast('Error al eliminar.');}
 }
 
+function showAddPersonForm(btn){
+  const time=btn.dataset.time;
+  btn.style.display='none';
+  const form=document.getElementById('add-form-'+time);
+  form.style.display='flex';
+  document.getElementById('add-input-'+time).focus();
+}
+
+function hideAddPersonForm(time){
+  const form=document.getElementById('add-form-'+time);
+  form.style.display='none';
+  // Show button again
+  const btn=form.previousElementSibling;
+  if(btn&&btn.classList.contains('add-person-btn'))btn.style.display='';
+  document.getElementById('add-input-'+time).value='';
+}
+
+async function confirmAddPerson(btn){
+  const time=btn.dataset.time;
+  const date=btn.dataset.date;
+  const input=document.getElementById('add-input-'+time);
+  const name=input.value.trim().toUpperCase();
+  if(!name){showToast('Ingresá un nombre.');return;}
+  try{
+    await sb('attendance',{method:'POST',prefer:'return=minimal',
+      body:JSON.stringify({class_date:date,class_time:time,student_name:name,present:true,marked_by:'prueba'})
+    });
+    showToast(name+' sumado a la clase.');
+    hideAddPersonForm(time);
+    const grid=document.querySelector('.class-block[data-time="'+time+'"] .students-grid');
+    if(grid){
+      const card=document.createElement('div');
+      card.className='student-card past-card';
+      card.style.cssText='--pb:#fff9c4;--pd:#f9a825';
+      card.innerHTML='<div class="sname">'+name+'</div><div class="plan-badge" style="background:#fff9c4;color:#5d4037;border:1px solid #f9a825">PRUEBA</div><div class="trial-badge">&#9733; PRUEBA</div>';
+      grid.appendChild(card);
+    }
+  }catch(e){
+    showToast(name+' ya registrado o error al sumar.');
+    hideAddPersonForm(time);
+  }
+}
+
 function showToast(msg){
   const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),3000);
@@ -822,6 +878,13 @@ document.getElementById('btn-admin').addEventListener('click',()=>{
   if(!adminLoggedIn)showAdminLogin();else showView('admin');
 });
 document.getElementById('admin-pwd').addEventListener('keydown',e=>{if(e.key==='Enter')doAdminLogin();});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&e.target.classList.contains('add-person-input')){
+    const time=e.target.id.replace('add-input-','');
+    const btn=document.querySelector('.add-person-confirm[data-time="'+time+'"]');
+    if(btn)confirmAddPerson(btn);
+  }
+});
 
 renderTeacherView();
 autoSync().then(()=>{if(currentView==='teacher')renderTeacherView();}).catch(()=>{});
