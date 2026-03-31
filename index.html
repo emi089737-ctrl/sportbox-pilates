@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0058)file:///C:/Users/Ricoe/Downloads/sportbox-profesor_30.html -->
+<!-- saved from url=(0058)file:///C:/Users/Ricoe/Downloads/sportbox-profesor_31.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
@@ -567,7 +567,7 @@ async function showStudentHistory(name){
   if(displayPhone){
     html+='<div style="background:#f0edf8;border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#4a4560;display:flex;align-items:center;justify-content:space-between">';
     html+='<span>&#128222; <strong>'+displayPhone+'</strong></span>';
-    html+='<button onclick="downloadContact(''+displayName.replace(/'/g,"\'")+"','"+displayPhone.replace(/'/g,"\'")+'\')" style="padding:5px 10px;border:none;border-radius:6px;background:#7c6fa0;color:#fff;font-size:11px;cursor:pointer;font-weight:500">&#8681; Agendar</button>';
+    html+='<button class="dl-contact-btn" style="padding:5px 10px;border:none;border-radius:6px;background:#7c6fa0;color:#fff;font-size:11px;cursor:pointer;font-weight:500">&#8681; Agendar</button>';
     html+='</div>';
   }
   html+='<div class="hstat-row">';
@@ -584,6 +584,13 @@ async function showStudentHistory(name){
   }
   const cleanName=name.match(/^(.+?)\s*\(\+?[\d\s\-]+\)$/);
   document.getElementById('history-modal-name').textContent=cleanName?cleanName[1]:name;
+  // Attach contact download button after render
+  setTimeout(()=>{
+    const dlBtn=document.querySelector('#history-modal-body .dl-contact-btn');
+    if(dlBtn&&displayPhone){
+      dlBtn.onclick=function(){downloadContact(displayName,displayPhone);};
+    }
+  },50);
   document.getElementById('history-modal-body').innerHTML=html;
   document.getElementById('history-modal').classList.add('show');
 }
