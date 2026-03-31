@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0058)file:///C:/Users/Ricoe/Downloads/sportbox-profesor_34.html -->
+<!-- saved from url=(0058)file:///C:/Users/Ricoe/Downloads/sportbox-profesor_35.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
@@ -222,7 +222,12 @@ async function sb(path,opts){
 
 function todayStr(){const d=new Date();d.setDate(d.getDate()+dateOffset);return d.toISOString().split('T')[0];}
 function getOffsetDate(){const d=new Date();d.setDate(d.getDate()+dateOffset);return d;}
-function nowHour(){return dateOffset===0?new Date().getHours():25;}
+function nowHour(){
+  if(dateOffset!==0)return 25;
+  const n=new Date();
+  // Subtract 5 minutes so class becomes editable 5 min before it starts
+  return n.getHours()+(n.getMinutes()-5)/60;
+}
 function todayDow(){const d=new Date();d.setDate(d.getDate()+dateOffset);return d.getDay();}
 function currentMonthStr(){const n=new Date();return n.getFullYear()+'-'+(String(n.getMonth()+1).padStart(2,'0'));}
 function fdDate(d){return d.toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'});}
@@ -415,14 +420,22 @@ async function renderTeacherView(){
   if(!withStudents.length){html+='<div class="no-class-msg">No hay clases programadas para este d\u00eda.</div>';container.innerHTML=html;return;}
 
   if(!isToday){
-    html+='<div class="class-section-label">Clases del d\u00eda</div>';
-    for(const t of withStudents)html+=await renderClassBlock(dayName,String(t),today,'next');
+    if(dateOffset<0){
+      // Yesterday or before: all classes are past/editable
+      html+='<div class="class-section-label">Clases del d\u00eda (editables)</div>';
+      for(const t of withStudents)html+=await renderClassBlock(dayName,String(t),today,'past');
+    }else{
+      // Future day: all classes shown as upcoming
+      html+='<div class="class-section-label">Clases del d\u00eda</div>';
+      for(const t of withStudents)html+=await renderClassBlock(dayName,String(t),today,'next');
+    }
   }else{
     // A class is "current" until the next class with students starts
     // A class is "past" only after the next class has begun
     const nextClassHour=withStudents.find(t=>t>hour);
+    // Current: class that has started (within 5min window) and next hasn't started yet
     const current=withStudents.find(t=>t<=hour&&(nextClassHour===undefined||hour<nextClassHour));
-    const past=withStudents.filter(t=>nextClassHour!==undefined?t<current:t<hour&&t!==(current));
+    const past=withStudents.filter(t=>current!==undefined?t<current:t<=Math.floor(hour));
     const upcoming=withStudents.filter(t=>t>(current!==undefined?current:hour));
     if(current!==undefined){html+='<div class="class-section-label">Clase actual</div>';html+=await renderClassBlock(dayName,String(current),today,'current');}
     if(upcoming.length){html+='<div class="class-section-label">Pr\u00f3ximas</div>';for(const t of upcoming)html+=await renderClassBlock(dayName,String(t),today,'next');}
