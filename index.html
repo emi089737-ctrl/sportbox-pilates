@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0058)file:///C:/Users/Ricoe/Downloads/sportbox-profesor_35.html -->
+<!-- saved from url=(0058)file:///C:/Users/Ricoe/Downloads/sportbox-profesor_36.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
@@ -208,6 +208,8 @@ let altaDates={};
 let currentView='teacher';
 let adminLoggedIn=false;
 let dateOffset=0;
+let studentsLoadedAt=0;
+const STUDENTS_CACHE_MS=120000; // 2 minutes
 
 async function sb(path,opts){
   opts=opts||{};
@@ -302,7 +304,9 @@ async function getRosterStudents(dayName,timeStr,today){
   return rosterRows.map(r=>r.student_name).sort((a,b)=>a.localeCompare(b));
 }
 
-async function loadStudents(){
+async function loadStudents(force){
+  const now=Date.now();
+  if(!force&&studentsLoadedAt>0&&(now-studentsLoadedAt)<STUDENTS_CACHE_MS)return;
   try{
     const [rows,altaRows]=await Promise.all([
       sb('students_v2?select=*'),
@@ -310,7 +314,8 @@ async function loadStudents(){
     ]);
     students={};(rows||[]).forEach(s=>{students[s.name]=s;});
     altaDates={};(altaRows||[]).forEach(r=>{if(!altaDates[r.student_name])altaDates[r.student_name]=r.change_date;});
-  }catch(e){console.log('loadStudents:',e.message);students={};altaDates={};}
+    studentsLoadedAt=now;
+  }catch(e){console.log('loadStudents:',e.message);}
 }
 
 async function autoSync(){
@@ -419,53 +424,56 @@ async function renderTeacherView(){
   const withStudents=TIMES.filter(t=>getStudentsForClass(dayName,String(t),today).length>0);
   if(!withStudents.length){html+='<div class="no-class-msg">No hay clases programadas para este d\u00eda.</div>';container.innerHTML=html;return;}
 
+  // PREFETCH: load all data for the day in parallel (1 call each instead of per-block)
+  const [dayAttendance,dayNotes,dayRoster]=await Promise.all([
+    sb('attendance?class_date=eq.'+today+'&select=*').catch(()=>[]),
+    sb('class_notes?class_day=eq.'+todayDow()+'&select=*').catch(()=>[]),
+    sb('class_roster?class_date=eq.'+today+'&select=*').catch(()=>[])
+  ]);
+  const prefetch={attendance:dayAttendance||[],notes:dayNotes||[],roster:dayRoster||[]};
+
   if(!isToday){
     if(dateOffset<0){
-      // Yesterday or before: all classes are past/editable
       html+='<div class="class-section-label">Clases del d\u00eda (editables)</div>';
-      for(const t of withStudents)html+=await renderClassBlock(dayName,String(t),today,'past');
+      for(const t of withStudents)html+=await renderClassBlock(dayName,String(t),today,'past',prefetch);
     }else{
-      // Future day: all classes shown as upcoming
       html+='<div class="class-section-label">Clases del d\u00eda</div>';
-      for(const t of withStudents)html+=await renderClassBlock(dayName,String(t),today,'next');
+      for(const t of withStudents)html+=await renderClassBlock(dayName,String(t),today,'next',prefetch);
     }
   }else{
-    // A class is "current" until the next class with students starts
-    // A class is "past" only after the next class has begun
     const nextClassHour=withStudents.find(t=>t>hour);
-    // Current: class that has started (within 5min window) and next hasn't started yet
     const current=withStudents.find(t=>t<=hour&&(nextClassHour===undefined||hour<nextClassHour));
     const past=withStudents.filter(t=>current!==undefined?t<current:t<=Math.floor(hour));
     const upcoming=withStudents.filter(t=>t>(current!==undefined?current:hour));
-    if(current!==undefined){html+='<div class="class-section-label">Clase actual</div>';html+=await renderClassBlock(dayName,String(current),today,'current');}
-    if(upcoming.length){html+='<div class="class-section-label">Pr\u00f3ximas</div>';for(const t of upcoming)html+=await renderClassBlock(dayName,String(t),today,'next');}
-    if(past.length){html+='<div class="class-section-label">Anteriores (editables)</div>';for(const t of [...past].reverse())html+=await renderClassBlock(dayName,String(t),today,'past');}
+    if(current!==undefined){html+='<div class="class-section-label">Clase actual</div>';html+=await renderClassBlock(dayName,String(current),today,'current',prefetch);}
+    if(upcoming.length){html+='<div class="class-section-label">Pr\u00f3ximas</div>';for(const t of upcoming)html+=await renderClassBlock(dayName,String(t),today,'next',prefetch);}
+    if(past.length){html+='<div class="class-section-label">Anteriores (editables)</div>';for(const t of [...past].reverse())html+=await renderClassBlock(dayName,String(t),today,'past',prefetch);}
   }
   container.innerHTML=html;
   attachAttendanceHandlers();
   attachNoteHandlers();
 }
 
-async function renderClassBlock(dayName,timeStr,today,type){
+async function renderClassBlock(dayName,timeStr,today,type,prefetch){
+  prefetch=prefetch||{attendance:[],notes:[],roster:[]};
   let classStudents;
   if(type==='past'){
-    // Past classes: use fixed roster snapshot
-    const rosterNames=await ensureRoster(dayName,timeStr,today);
-    classStudents=rosterNames.map(name=>students[name]||{name,plan:1,is_trial:false,schedule:[]}).sort((a,b)=>a.name.localeCompare(b.name));
+    const rosterNames=prefetch.roster.filter(r=>r.class_time===timeStr).map(r=>r.student_name);
+    if(rosterNames.length>0){
+      classStudents=rosterNames.map(name=>students[name]||{name,plan:1,is_trial:false,schedule:[]}).sort((a,b)=>a.name.localeCompare(b.name));
+    }else{
+      const fetched=await ensureRoster(dayName,timeStr,today);
+      classStudents=fetched.map(name=>students[name]||{name,plan:1,is_trial:false,schedule:[]}).sort((a,b)=>a.name.localeCompare(b.name));
+    }
   }else{
     classStudents=getStudentsForClass(dayName,timeStr,today);
-    // For current class: also snapshot into roster (so it's ready when it becomes past)
-    if(type==='current'){
-      ensureRoster(dayName,timeStr,today).catch(()=>{});
-    }
+    if(type==='current')ensureRoster(dayName,timeStr,today).catch(()=>{});
   }
   const dayNum=todayDow();
-  const [attendance,noteRows]=await Promise.all([
-    sb('attendance?class_date=eq.'+today+'&class_time=eq.'+timeStr+'&select=*').catch(()=>[]),
-    sb('class_notes?class_time=eq.'+timeStr+'&class_day=eq.'+dayNum+'&select=*').catch(()=>[])
-  ]);
-  const absentSet=new Set((attendance||[]).filter(a=>!a.present).map(a=>a.student_name));
-  const noteText=noteRows&&noteRows.length?noteRows[0].note:'';
+  const attendance=prefetch.attendance.filter(a=>a.class_time===timeStr);
+  const noteRows=prefetch.notes.filter(n=>n.class_time===timeStr);
+  const absentSet=new Set(attendance.filter(a=>!a.present).map(a=>a.student_name));
+  const noteText=noteRows.length?noteRows[0].note:'';
   const blockClass=type==='current'?'current-block':type==='past'?'past-block':'next-block';
   let html='<div class="class-block '+blockClass+'" data-time="'+timeStr+'" data-day="'+dayName+'">';
   html+='<div class="class-block-header"><div class="class-time-big">'+timeStr+':00 hs</div>';
@@ -750,7 +758,7 @@ async function doSync(){
     const data=await resp.json();
     const parsed=parseSheet(data.values||[],data.backgrounds||[]);
     await saveStudentsToSupabase(parsed);
-    await loadStudents();
+    await loadStudents(true);
     renderSyncPanel();
     res.innerHTML='<div class="sync-success">&#10003; '+Object.keys(parsed).length+' alumnos sincronizados.</div>';
   }catch(e){res.innerHTML='<div class="sync-error">Error: '+e.message+'</div>';}
@@ -997,6 +1005,8 @@ function downloadContact(name,phone){
   URL.revokeObjectURL(url);
   showToast('Contacto descargado.');
 }
+
+function toggleNote(el){el.classList.toggle('expanded');}
 
 function showToast(msg){
   const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
