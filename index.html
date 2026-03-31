@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0058)file:///C:/Users/Ricoe/Downloads/sportbox-profesor_42.html -->
+<!-- saved from url=(0058)file:///C:/Users/Ricoe/Downloads/sportbox-profesor_43.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
@@ -293,7 +293,11 @@ function getStudentsForClass(dayName,timeNum,classDateStr){
 }
 
 async function ensureRoster(dayName,timeStr,today){
-  // Check if roster already exists for this class
+  // Never create roster for future dates or today's upcoming classes
+  const classDateTime=new Date(today+'T'+timeStr.padStart(2,'0')+':00:00');
+  const now=new Date();
+  if(classDateTime>now)return[]; // Class hasn't happened yet
+  // Check if roster already exists
   const existing=await sb('class_roster?class_date=eq.'+today+'&class_time=eq.'+timeStr+'&select=student_name').catch(()=>[]);
   if(existing&&existing.length>0)return existing.map(r=>r.student_name);
   // Take a snapshot from sheet students
@@ -877,7 +881,7 @@ async function renderRanking(){
   // Load absences AND roster appearances (actual classes attended)
   const [absRows,rosterRows]=await Promise.all([
     sb('attendance?present=eq.false&select=student_name').catch(()=>[]),
-    sb('class_roster?select=student_name').catch(()=>[])
+    sb('class_roster?class_date=lte.'+todayStr()+'&select=student_name').catch(()=>[])
   ]);
 
   const absCounts={};
